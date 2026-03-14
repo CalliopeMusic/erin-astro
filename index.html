@@ -1254,24 +1254,29 @@
     border-radius: 14px;
     padding: 5px;
     position: relative;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
+  .tab-nav::-webkit-scrollbar { display: none; }
   .tab-btn {
-    flex: 1;
+    flex: 0 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 12px 16px;
+    gap: 6px;
+    padding: 11px 18px;
     background: transparent;
     border: none;
     border-radius: 10px;
     color: var(--text-muted);
     font-family: 'Cinzel', serif;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.25s ease;
+    white-space: nowrap;
   }
   .tab-btn:hover { color: var(--gold-light); }
   .tab-btn.active {
@@ -1280,11 +1285,8 @@
     color: var(--gold-light);
     box-shadow: 0 2px 12px rgba(201,169,110,0.1);
   }
-  .tab-icon {
-    font-size: 15px;
-    opacity: 0.9;
-  }
-  .tab-label { letter-spacing: 2.5px; }
+  .tab-icon { font-size: 14px; opacity: 0.9; }
+  .tab-label { letter-spacing: 2px; }
 
   /* ── TAB PAGES ── */
   .tab-page {
@@ -1295,6 +1297,50 @@
 
   /* remove old divider — replaced by tab nav spacing */
   .divider { display: none; }
+
+  /* ── WEEK VIEW ── */
+  .week-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+  .week-day-strip {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-bottom: 28px;
+  }
+  .week-day-cell {
+    background: var(--surface);
+    border: 1px solid rgba(201,169,110,0.1);
+    border-radius: 10px;
+    padding: 10px 6px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .week-day-cell.today {
+    border-color: rgba(201,169,110,0.5);
+    background: rgba(201,169,110,0.08);
+  }
+  .week-day-cell.has-event { border-color: rgba(201,169,110,0.3); }
+  .week-day-name {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .week-day-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .week-day-cell.today .week-day-num { color: var(--gold-light); }
+  .week-day-dots {
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+    min-height: 7px;
+  }
 
   @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
@@ -1412,8 +1458,6 @@
   }
 
   @media (max-width: 640px) {
-    .sky-control-bar { grid-template-columns: 1fr 1fr; }
-    .sky-dt-calc, .sky-dt-now { grid-column: span 1; }
     .natal-section { grid-template-columns: 1fr; }
     .oracle-input-row { flex-direction: column; align-items: stretch; }
     .oracle-btn { text-align: center; }
@@ -1430,31 +1474,51 @@
   @media (max-width: 480px) {
 
     /* Container */
-    .container { padding: 0 16px 60px; }
+    .container { padding: 0 14px 60px; }
 
     /* Header */
-    header { padding: 40px 0 28px; }
+    header { padding: 36px 0 24px; }
     .header-ornament { font-size: 20px; letter-spacing: 8px; margin-bottom: 14px; }
     .birth-details { font-size: 13px; line-height: 1.6; }
     .natal-tags { gap: 6px; margin-top: 12px; }
     .ntag { font-size: 10px; padding: 4px 10px; letter-spacing: 1px; }
 
-    /* Tab nav — icon only on very small screens */
-    .tab-nav { padding: 4px; margin-bottom: 24px; border-radius: 12px; }
-    .tab-btn { padding: 10px 6px; gap: 4px; flex-direction: column; font-size: 8px; letter-spacing: 1.5px; }
-    .tab-icon { font-size: 16px; }
-    .tab-label { font-size: 8px; letter-spacing: 1px; }
-
-    /* DS picker */
-    .ds-picker-row {
+    /* Tab nav — scrolls horizontally, icons + short labels */
+    .tab-nav {
+      padding: 4px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      gap: 2px;
+    }
+    .tab-btn {
+      padding: 9px 12px;
       flex-direction: column;
-      padding: 16px;
+      gap: 3px;
+      min-width: 60px;
+    }
+    .tab-icon { font-size: 15px; }
+    .tab-label { font-size: 7.5px; letter-spacing: 0.8px; }
+
+    /* DS picker — keep date & time side by side, stack actions below */
+    .ds-picker-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      padding: 14px;
       gap: 10px;
     }
-    .ds-field { min-width: unset; width: 100%; }
-    .ds-actions { width: 100%; }
-    .ds-calc-btn { flex: 1; text-align: center; }
-    .ds-now-btn { flex: 1; text-align: center; }
+    .ds-field { min-width: unset; }
+    .ds-field:first-child { grid-column: 1; }
+    .ds-field:nth-child(2) { grid-column: 2; }
+    .ds-actions {
+      grid-column: 1 / -1;
+      width: 100%;
+      display: flex;
+      gap: 8px;
+    }
+    .ds-calc-btn { flex: 1; text-align: center; padding: 10px 8px; font-size: 9px; }
+    .ds-now-btn  { flex: 1; text-align: center; padding: 10px 8px; font-size: 9px; }
+    .ds-input { font-size: 14px; padding: 9px 10px; }
 
     /* DS two-col grid */
     .ds-main-grid { grid-template-columns: 1fr !important; }
@@ -1462,7 +1526,7 @@
     /* Oracle context grid */
     .ds-context-grid { grid-template-columns: 1fr; }
 
-    /* DS suggestions — full width pills */
+    /* DS suggestions */
     .ds-suggestions { gap: 6px; }
     .ds-suggest { font-size: 12px; padding: 7px 12px; }
 
@@ -1470,11 +1534,25 @@
     .ds-input-row { flex-direction: column; }
     .ds-ask-btn { width: 100%; justify-content: center; }
 
+    /* Oracle wrap */
+    .ds-oracle-wrap { padding: 22px 18px; }
+
+    /* Week day strip */
+    .week-day-strip { gap: 4px; }
+    .week-day-cell { padding: 8px 3px; border-radius: 8px; }
+    .week-day-name { font-size: 7px; letter-spacing: 0.5px; }
+    .week-day-num { font-size: 15px; }
+
     /* Month nav */
     .month-label { font-size: 16px; letter-spacing: 2px; }
     .month-cal-header span { font-size: 8px; padding: 8px 2px; }
     .cal-day { min-height: 42px; padding: 4px 5px; }
     .cal-day-num { font-size: 10px; }
+
+    /* Month event cards */
+    .month-event-card { padding: 16px; }
+    .month-ev-title { font-size: 12px; }
+    .month-ev-body { font-size: 14px; }
 
     /* Year reading */
     .overview-grid { grid-template-columns: 1fr; }
@@ -1488,6 +1566,11 @@
 
     /* Reading cards */
     .reading-answer { font-size: 14px; }
+    .reading-question { font-size: 14px; }
+
+    /* Timeline events */
+    .event-header { padding: 12px 14px; }
+    .event-title { font-size: 13px; }
   }
 
   /* ── API KEY MODAL ── */
@@ -1605,6 +1688,10 @@
         <span class="tab-icon">☉</span>
         <span class="tab-label">Daily Sky</span>
       </button>
+      <button class="tab-btn" data-tab="week" onclick="switchTab('week')">
+        <span class="tab-icon">🌙</span>
+        <span class="tab-label">This Week</span>
+      </button>
       <button class="tab-btn" data-tab="month" onclick="switchTab('month')">
         <span class="tab-icon">◐</span>
         <span class="tab-label">This Month</span>
@@ -1669,6 +1756,43 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- PAGE: THIS WEEK -->
+    <div id="page-week" class="tab-page">
+
+      <div class="week-nav">
+        <button class="month-nav-btn" onclick="shiftWeek(-1)">‹</button>
+        <div class="month-nav-center">
+          <div id="week-label" class="month-label"></div>
+          <button class="month-today-btn" onclick="goToCurrentWeek()">This Week</button>
+        </div>
+        <button class="month-nav-btn" onclick="shiftWeek(1)">›</button>
+      </div>
+
+      <!-- Week day strip -->
+      <div id="week-day-strip" class="week-day-strip"></div>
+
+      <!-- Week overview narrative -->
+      <div id="week-overview" class="month-overview"></div>
+
+      <!-- Events this week -->
+      <div class="month-events-header">
+        <span id="week-events-title" class="month-events-title"></span>
+      </div>
+      <div id="week-events-list" class="month-events-list"></div>
+      <div id="week-no-events" class="month-no-events" style="display:none">
+        No major transiting events fall in this week.
+      </div>
+
+      <!-- Oracle readings this week -->
+      <div id="week-readings-section" style="display:none">
+        <div class="month-events-header" style="margin-top:40px">
+          <span id="week-readings-title" class="month-events-title"></span>
+        </div>
+        <div id="week-readings-list" class="readings-log"></div>
+      </div>
+
     </div>
 
     <!-- PAGE: THIS MONTH -->
@@ -1876,6 +2000,7 @@ function switchTab(tab) {
   document.getElementById(`page-${tab}`).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
   if (tab === 'month') renderMonth();
+  if (tab === 'week') renderWeek();
 }
 
 // ── THIS MONTH ──
@@ -2048,6 +2173,204 @@ function renderMonth() {
 
   // Readings for this month
   loadReadings().then(renderMonthReadings);
+}
+
+// ── THIS WEEK ──
+const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+let _currentWeekStart = getWeekStart(new Date());
+
+function getWeekStart(date) {
+  const d = new Date(date);
+  const day = d.getDay(); // 0=Sun
+  d.setDate(d.getDate() - day);
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
+function shiftWeek(delta) {
+  _currentWeekStart = new Date(_currentWeekStart);
+  _currentWeekStart.setDate(_currentWeekStart.getDate() + delta * 7);
+  renderWeek();
+}
+
+function goToCurrentWeek() {
+  _currentWeekStart = getWeekStart(new Date());
+  renderWeek();
+}
+
+function formatWeekLabel(start) {
+  const end = new Date(start);
+  end.setDate(end.getDate() + 6);
+  const opts = { month: 'short', day: 'numeric' };
+  const startStr = start.toLocaleDateString('en-US', opts);
+  const endStr = end.toLocaleDateString('en-US', { ...opts, year: 'numeric' });
+  return `${startStr} – ${endStr}`;
+}
+
+function eventOverlapsWeek(ev, weekStart) {
+  const weekEnd = new Date(weekStart);
+  weekEnd.setDate(weekEnd.getDate() + 6);
+  weekEnd.setHours(23, 59, 59);
+
+  // Check primary date
+  const str = ev.date.split('&')[0].trim();
+  const pd = new Date(str);
+  if (!isNaN(pd) && pd >= weekStart && pd <= weekEnd) return true;
+
+  // Check duration window
+  const durMatch = ev.duration.match(/^(.+?)\s*·/);
+  if (!durMatch) return false;
+  const range = durMatch[1].trim();
+  const parts = range.split('–').map(s => s.trim());
+  if (parts.length < 2) return false;
+  const endRaw = parts[1];
+  const endDate = new Date(endRaw);
+  if (isNaN(endDate)) return false;
+  let startRaw = parts[0];
+  if (!/\d{4}/.test(startRaw)) startRaw += ', ' + endDate.getFullYear();
+  const startDate = new Date(startRaw);
+  if (isNaN(startDate)) return false;
+  return startDate <= weekEnd && endDate >= weekStart;
+}
+
+function getWeekNarrative(weekStart) {
+  // Find events active this week and build a short narrative
+  const weekEvents = data.events.filter(ev => eventOverlapsWeek(ev, weekStart));
+  if (!weekEvents.length) {
+    return `A quieter week with no exact transiting events — a good time to integrate recent shifts and tend to everyday life. The background planetary themes continue their slower work beneath the surface.`;
+  }
+  const positives = weekEvents.filter(e => e.type === 'positive').map(e => e.title.split('—')[0].trim());
+  const challenging = weekEvents.filter(e => e.type === 'challenging').map(e => e.title.split('—')[0].trim());
+  const healing = weekEvents.filter(e => e.type === 'healing').map(e => e.title.split('—')[0].trim());
+  const transform = weekEvents.filter(e => e.type === 'transformative').map(e => e.title.split('—')[0].trim());
+
+  let parts = [];
+  if (positives.length) parts.push(`✦ <strong>Uplifting energy:</strong> ${positives.join(', ')}`);
+  if (challenging.length) parts.push(`⚡ <strong>Worth navigating carefully:</strong> ${challenging.join(', ')}`);
+  if (healing.length) parts.push(`💙 <strong>Healing available:</strong> ${healing.join(', ')}`);
+  if (transform.length) parts.push(`🔮 <strong>Transformative currents:</strong> ${transform.join(', ')}`);
+  return parts.join('<br>');
+}
+
+function renderWeek() {
+  const weekStart = _currentWeekStart;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // Label
+  document.getElementById('week-label').textContent = formatWeekLabel(weekStart);
+
+  // Narrative
+  document.getElementById('week-overview').innerHTML = getWeekNarrative(weekStart);
+
+  // Build day map
+  const weekEvents = data.events.filter(ev => eventOverlapsWeek(ev, weekStart));
+  const dayMap = {}; // day-of-week (0-6) → [event types]
+  weekEvents.forEach(ev => {
+    const str = ev.date.split('&')[0].trim();
+    const pd = new Date(str);
+    if (!isNaN(pd)) {
+      const weekEnd = new Date(weekStart);
+      weekEnd.setDate(weekEnd.getDate() + 6);
+      if (pd >= weekStart && pd <= weekEnd) {
+        const dow = pd.getDay();
+        if (!dayMap[dow]) dayMap[dow] = [];
+        dayMap[dow].push(ev.type);
+      }
+    }
+  });
+
+  // Day strip
+  const strip = document.getElementById('week-day-strip');
+  let cells = '';
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(weekStart);
+    d.setDate(d.getDate() + i);
+    const isToday = d.getTime() === today.getTime();
+    const dots = (dayMap[i] || []).map(t => `<div class="cal-dot ${t}"></div>`).join('');
+    cells += `<div class="week-day-cell ${isToday ? 'today' : ''} ${dayMap[i] ? 'has-event' : ''}">
+      <div class="week-day-name">${DAY_NAMES[d.getDay()]}</div>
+      <div class="week-day-num">${d.getDate()}</div>
+      ${dots ? `<div class="week-day-dots">${dots}</div>` : '<div class="week-day-dots"></div>'}
+    </div>`;
+  }
+  strip.innerHTML = cells;
+
+  // Events list
+  const listEl = document.getElementById('week-events-list');
+  const noEvEl = document.getElementById('week-no-events');
+  const titleEl = document.getElementById('week-events-title');
+
+  titleEl.textContent = weekEvents.length
+    ? `${weekEvents.length} Transit${weekEvents.length > 1 ? 's' : ''} Active This Week`
+    : '';
+
+  if (!weekEvents.length) {
+    listEl.innerHTML = '';
+    noEvEl.style.display = 'block';
+  } else {
+    noEvEl.style.display = 'none';
+    const typeLabel = { positive: 'Uplifting', challenging: 'Challenging', transformative: 'Transformative', healing: 'Healing' };
+    listEl.innerHTML = weekEvents.map((ev, i) => `
+      <div class="month-event-card ${ev.type}" style="animation-delay:${i * 0.06}s">
+        <div class="month-ev-meta">
+          <span class="month-ev-date">${ev.date}</span>
+          <span class="month-ev-badge ${ev.type}">${typeLabel[ev.type]}</span>
+        </div>
+        <div class="month-ev-title">${ev.title}</div>
+        <div class="month-ev-duration">${ev.duration}</div>
+        <div class="month-ev-body">${ev.description}</div>
+        <div class="month-ev-tip">${ev.tip}</div>
+      </div>
+    `).join('');
+  }
+
+  // Oracle readings this week
+  loadReadings().then(renderWeekReadings);
+}
+
+function renderWeekReadings(readings) {
+  const section = document.getElementById('week-readings-section');
+  if (!section) return;
+
+  const weekStart = _currentWeekStart;
+  const weekEnd = new Date(weekStart);
+  weekEnd.setDate(weekEnd.getDate() + 6);
+  weekEnd.setHours(23, 59, 59, 999);
+
+  const weekReadings = readings.filter(r => {
+    if (!r.skyYear || !r.skyMonth || !r.skyDay) return false;
+    const d = new Date(r.skyYear, r.skyMonth - 1, r.skyDay);
+    return d >= weekStart && d <= weekEnd;
+  });
+
+  const titleEl = document.getElementById('week-readings-title');
+  const listEl = document.getElementById('week-readings-list');
+
+  if (!weekReadings.length) {
+    section.style.display = 'none';
+    return;
+  }
+
+  section.style.display = 'block';
+  titleEl.textContent = `${weekReadings.length} Oracle Reading${weekReadings.length > 1 ? 's' : ''} This Week`;
+  listEl.innerHTML = weekReadings.map(r => `
+    <div class="reading-card" id="wrc-${r.id}">
+      <div class="reading-card-header">
+        <div class="reading-meta">
+          <span class="reading-date">${r.dateStr}</span>
+          <span class="reading-sky-snap">${r.skySnap}</span>
+        </div>
+        <button class="reading-delete" onclick="deleteReading('${r.id}')" title="Delete reading">✕</button>
+      </div>
+      <div class="reading-question">"${r.question}"</div>
+      <div class="reading-answer-wrap">
+        <div class="reading-answer">${r.answer}</div>
+      </div>
+      <div class="reading-aspects">${r.aspectSnap}</div>
+    </div>
+  `).join('');
 }
 
 
@@ -2808,6 +3131,7 @@ async function deleteReading(id) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
     renderReadingsLog(updated);
     renderMonthReadings(updated);
+    renderWeekReadings(updated);
   } catch (err) {
     console.warn('Delete failed:', err);
   }
@@ -2927,7 +3251,7 @@ Houses: I Aries, II Taurus, III Gemini, IV Cancer, V Leo, VI Virgo,
 TODAY'S TRANSITING PLANETS:
 ${planetLines}
 
-ACTIVE ASPECTS (transiting planets to Connor's natal chart):
+ACTIVE ASPECTS (transiting planets to Erin's natal chart):
 ${aspectLines}
 
 BACKGROUND TRANSITS FOR THIS YEAR (Oct 2025–Oct 2026):
@@ -3012,12 +3336,14 @@ Format your response in clear paragraphs — no bullet points, no numbered lists
       skySnap,
       aspectSnap,
       skyYear: skyDate.getFullYear(),
-      skyMonth: skyDate.getMonth() + 1  // 1-indexed
+      skyMonth: skyDate.getMonth() + 1,
+      skyDay: skyDate.getDate()
     };
     const updated = await saveReading(reading);
     if (updated) {
       renderReadingsLog(updated);
       renderMonthReadings(updated);
+      renderWeekReadings(updated);
     }
 
   } catch (err) {

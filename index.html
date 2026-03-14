@@ -1,0 +1,3134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Erin · Astro Gold Predictive Reading</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a96e;
+    --gold-light: #e8d5a3;
+    --gold-dark: #8b6914;
+    --deep: #0d0a14;
+    --mid: #1a1525;
+    --surface: #221c30;
+    --surface2: #2d2540;
+    --text: #e8e0d5;
+    --text-muted: #9d8fa0;
+    --accent-teal: #7ecdc4;
+    --accent-rose: #e07070;
+    --accent-purple: #b07fd4;
+    --accent-blue: #6aaddb;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--deep);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 30%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 70%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 65% 85%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(2px 2px at 40% 55%, rgba(201,169,110,0.3) 0%, transparent 100%),
+      radial-gradient(2px 2px at 70% 20%, rgba(201,169,110,0.2) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  header {
+    text-align: center;
+    padding: 64px 0 48px;
+    animation: fadeInUp 0.8s ease both;
+  }
+
+  .header-ornament {
+    font-size: 28px;
+    letter-spacing: 12px;
+    color: var(--gold);
+    opacity: 0.6;
+    margin-bottom: 20px;
+  }
+
+  header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(28px, 6vw, 52px);
+    font-weight: 400;
+    color: var(--gold-light);
+    letter-spacing: 4px;
+    line-height: 1.2;
+  }
+
+  header h1 span {
+    display: block;
+    font-size: 0.42em;
+    letter-spacing: 8px;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-top: 10px;
+    font-family: 'Lato', sans-serif;
+    font-style: italic;
+  }
+
+  .birth-details {
+    margin-top: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+  }
+
+  .divider {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 28px auto;
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    animation: fadeInUp 0.6s ease both;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(201,169,110,0.4), transparent);
+  }
+
+  /* Overview cards */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .overview-card {
+    background: var(--surface);
+    border: 1px solid rgba(201,169,110,0.12);
+    border-radius: 14px;
+    padding: 24px;
+    animation: fadeInUp 0.6s ease both;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .overview-card:hover { transform: translateY(-3px); border-color: rgba(201,169,110,0.3); }
+  .overview-card .oc-icon { font-size: 24px; margin-bottom: 12px; }
+
+  .overview-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .overview-card p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  /* Planet summary */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .planet-card {
+    background: var(--surface);
+    border: 1px solid rgba(201,169,110,0.15);
+    border-radius: 12px;
+    padding: 20px 18px;
+    transition: transform 0.2s, border-color 0.2s;
+    animation: fadeInUp 0.6s ease both;
+  }
+
+  .planet-card:hover { transform: translateY(-3px); border-color: rgba(201,169,110,0.4); }
+  .planet-card .symbol { font-size: 26px; margin-bottom: 8px; }
+
+  .planet-card .planet-name {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .planet-card .planet-pos {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .planet-card .planet-pos strong { color: var(--text); font-weight: 400; }
+
+  /* Filter */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+    align-items: center;
+  }
+
+  .filter-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-right: 4px;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid rgba(201,169,110,0.25);
+    color: var(--text-muted);
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: rgba(201,169,110,0.15);
+    color: var(--gold-light);
+    border-color: var(--gold);
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--gold) 0%, rgba(201,169,110,0.1) 100%);
+  }
+
+  .event {
+    position: relative;
+    margin-bottom: 8px;
+    animation: fadeInUp 0.4s ease both;
+  }
+
+  .event::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 18px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    background: var(--deep);
+  }
+
+  .event.positive::before { border-color: var(--accent-teal); box-shadow: 0 0 6px rgba(126,205,196,0.4); }
+  .event.challenging::before { border-color: var(--accent-rose); box-shadow: 0 0 6px rgba(224,112,112,0.4); }
+  .event.transformative::before { border-color: var(--accent-purple); box-shadow: 0 0 6px rgba(176,127,212,0.4); }
+  .event.healing::before { border-color: var(--accent-blue); box-shadow: 0 0 6px rgba(106,173,219,0.4); }
+
+  .event-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 14px 18px;
+    transition: background 0.2s, border-color 0.2s;
+    user-select: none;
+  }
+
+  .event-header:hover { background: var(--surface2); border-color: rgba(201,169,110,0.2); }
+
+  .event-date {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    color: var(--gold);
+    min-width: 70px;
+    flex-shrink: 0;
+  }
+
+  .event-badge {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .badge-positive { background: rgba(126,205,196,0.15); color: var(--accent-teal); border: 1px solid rgba(126,205,196,0.3); }
+  .badge-challenging { background: rgba(224,112,112,0.15); color: var(--accent-rose); border: 1px solid rgba(224,112,112,0.3); }
+  .badge-transformative { background: rgba(176,127,212,0.15); color: var(--accent-purple); border: 1px solid rgba(176,127,212,0.3); }
+  .badge-healing { background: rgba(106,173,219,0.15); color: var(--accent-blue); border: 1px solid rgba(106,173,219,0.3); }
+
+  .event-title {
+    flex: 1;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .event-chevron {
+    color: var(--text-muted);
+    font-size: 12px;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  .event.open .event-chevron { transform: rotate(180deg); }
+
+  .event-body {
+    display: none;
+    background: rgba(13,10,20,0.5);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    padding: 18px 20px;
+    margin-top: -4px;
+  }
+
+  .event.open .event-body { display: block; }
+
+  .event-duration {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+
+  .event-body p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #cfc5d8;
+  }
+
+  .event-body .key-theme {
+    margin-top: 14px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .positive .key-theme { background: rgba(126,205,196,0.08); border-left: 3px solid var(--accent-teal); color: #a8e0db; }
+  .challenging .key-theme { background: rgba(224,112,112,0.08); border-left: 3px solid var(--accent-rose); color: #e8a0a0; }
+  .transformative .key-theme { background: rgba(176,127,212,0.08); border-left: 3px solid var(--accent-purple); color: #c8a8e0; }
+  .healing .key-theme { background: rgba(106,173,219,0.08); border-left: 3px solid var(--accent-blue); color: #a0c8e8; }
+
+  /* Natal tags */
+  .natal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 16px;
+  }
+  .ntag {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--gold-light);
+    background: rgba(201,169,110,0.1);
+    border: 1px solid rgba(201,169,110,0.25);
+    border-radius: 20px;
+    padding: 4px 12px;
+  }
+
+  /* Natal section */
+  .natal-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+    align-items: start;
+    animation: fadeInUp 0.6s ease both;
+  }
+
+  .natal-wheel-wrap {
+    background: var(--surface);
+    border: 1px solid rgba(201,169,110,0.15);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #chart-wheel { width: 100%; max-width: 340px; }
+
+  .natal-tables {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .natal-table-block {
+    background: var(--surface);
+    border: 1px solid rgba(201,169,110,0.12);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .natal-table-title {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 10px 14px 8px;
+    border-bottom: 1px solid rgba(201,169,110,0.1);
+  }
+
+  .natal-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  .natal-table thead th {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    padding: 6px 14px;
+    text-align: left;
+    background: rgba(0,0,0,0.2);
+  }
+
+  .natal-table tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.15s;
+  }
+
+  .natal-table tbody tr:hover { background: rgba(201,169,110,0.05); }
+  .natal-table tbody tr:last-child { border-bottom: none; }
+
+  .natal-table tbody td {
+    padding: 6px 14px;
+    color: var(--text-muted);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13.5px;
+  }
+
+  .natal-table tbody td:first-child { color: var(--text); }
+
+  /* ══════════════════════════════════════════
+     DAILY SKY — Redesigned
+  ══════════════════════════════════════════ */
+
+  /* Date/Time Picker */
+  .ds-picker-wrap {
+    margin-bottom: 32px;
+  }
+  .ds-picker-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 12px;
+    background: linear-gradient(135deg, rgba(201,169,110,0.06), rgba(0,0,0,0.2));
+    border: 1px solid rgba(201,169,110,0.18);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 10px;
+  }
+  .ds-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 130px;
+  }
+  .ds-field-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.75;
+  }
+  .ds-input {
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    color-scheme: dark;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .ds-input:focus {
+    border-color: rgba(201,169,110,0.55);
+    background: rgba(0,0,0,0.5);
+  }
+  .ds-actions {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+    flex-shrink: 0;
+  }
+  .ds-calc-btn {
+    background: linear-gradient(135deg, rgba(201,169,110,0.3), rgba(201,169,110,0.1));
+    border: 1px solid rgba(201,169,110,0.55);
+    color: var(--gold-light);
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    padding: 11px 22px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.22s;
+    white-space: nowrap;
+  }
+  .ds-calc-btn:hover {
+    background: rgba(201,169,110,0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(201,169,110,0.2);
+  }
+  .ds-now-btn {
+    background: transparent;
+    border: 1px solid rgba(201,169,110,0.15);
+    color: var(--text-muted);
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 11px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .ds-now-btn:hover { color: var(--gold); border-color: rgba(201,169,110,0.4); }
+  .ds-active-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-muted);
+    opacity: 0.7;
+    padding-left: 4px;
+    min-height: 18px;
+  }
+  .ds-label-live {
+    color: #6ee7b7;
+    font-style: normal;
+    font-size: 10px;
+    margin-right: 4px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  /* Loading */
+  .ds-loading {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 15px;
+    padding: 24px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sky-pulse { animation: pulse 1.4s ease-in-out infinite; color: var(--gold); }
+
+  /* Main two-column grid */
+  .ds-main-grid {
+    display: none;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 20px;
+    margin-bottom: 40px;
+    align-items: start;
+  }
+  @media (max-width: 720px) { .ds-main-grid { grid-template-columns: 1fr; } }
+
+  .ds-col {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(201,169,110,0.12);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .ds-collapsible {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(201,169,110,0.12);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .ds-collapsible summary { list-style: none; }
+  .ds-collapsible summary::-webkit-details-marker { display: none; }
+  .ds-collapsible[open] .ds-chevron { transform: rotate(90deg); }
+  .ds-chevron {
+    font-size: 16px;
+    color: var(--gold);
+    opacity: 0.5;
+    transition: transform 0.22s ease;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+  .ds-col-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(201,169,110,0.1);
+    background: rgba(0,0,0,0.2);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.18s;
+    gap: 8px;
+  }
+  .ds-col-header:hover { background: rgba(201,169,110,0.05); }
+  .ds-collapsible[open] .ds-col-header {
+    border-bottom: 1px solid rgba(201,169,110,0.1);
+  }
+  .ds-collapsible:not([open]) .ds-col-header {
+    border-bottom: none;
+    border-radius: 16px;
+  }
+  .ds-col-title {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+    flex: 1;
+  }
+  .ds-legend {
+    display: flex;
+    gap: 10px;
+  }
+  .ds-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'Cinzel', serif;
+    font-size: 7.5px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    opacity: 0.6;
+    text-transform: uppercase;
+  }
+  .ds-dot { width: 5px; height: 5px; border-radius: 50%; }
+  .ds-dot.easy { background: var(--accent-teal); }
+  .ds-dot.hard { background: var(--accent-rose); }
+  .ds-dot.neutral { background: var(--accent-purple); }
+
+  /* Planet list */
+  .ds-planet-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .ds-planet-row {
+    display: grid;
+    grid-template-columns: 28px 1fr 1fr auto;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    transition: background 0.15s;
+  }
+  .ds-planet-row:last-child { border-bottom: none; }
+  .ds-planet-row:hover { background: rgba(201,169,110,0.04); }
+  .ds-planet-sym {
+    font-size: 17px;
+    line-height: 1;
+    text-align: center;
+  }
+  .ds-planet-name {
+    font-family: 'Cinzel', serif;
+    font-size: 8.5px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0.7;
+  }
+  .ds-planet-sign {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .ds-planet-deg {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    opacity: 0.65;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  /* Aspects list */
+  .ds-aspects-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .ds-aspect-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    border-left: 3px solid transparent;
+    transition: background 0.15s;
+  }
+  .ds-aspect-row:last-child { border-bottom: none; }
+  .ds-aspect-row:hover { background: rgba(255,255,255,0.025); }
+  .ds-aspect-row.easy  { border-left-color: var(--accent-teal); }
+  .ds-aspect-row.hard  { border-left-color: var(--accent-rose); }
+  .ds-aspect-row.neutral { border-left-color: var(--accent-purple); }
+  .ds-aspect-pip { display: none; }
+  .ds-aspect-text { flex: 1; }
+  .ds-aspect-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14.5px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    line-height: 1.4;
+    margin-bottom: 3px;
+  }
+  .ds-aspect-main strong { font-weight: 500; }
+  .ds-aspect-type-badge {
+    font-family: 'Cinzel', serif;
+    font-size: 7.5px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .ds-aspect-type-badge.easy    { background: rgba(94,234,212,0.12); color: var(--accent-teal); }
+  .ds-aspect-type-badge.hard    { background: rgba(224,112,112,0.12); color: var(--accent-rose); }
+  .ds-aspect-type-badge.neutral { background: rgba(167,139,250,0.12); color: var(--accent-purple); }
+  .ds-aspect-detail {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    opacity: 0.6;
+  }
+
+  /* ══════════════════════════════════════════
+     ORACLE — Redesigned
+  ══════════════════════════════════════════ */
+  .ds-oracle-wrap {
+    background: linear-gradient(160deg, rgba(201,169,110,0.05) 0%, rgba(0,0,0,0.2) 100%);
+    border: 1px solid rgba(201,169,110,0.18);
+    border-radius: 20px;
+    padding: 32px 36px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ds-oracle-wrap::after {
+    content: '✦';
+    position: absolute;
+    bottom: -30px; right: 20px;
+    font-size: 120px;
+    color: rgba(201,169,110,0.03);
+    pointer-events: none;
+    line-height: 1;
+  }
+  .ds-oracle-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(201,169,110,0.1);
+  }
+  .ds-oracle-title-block {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .ds-oracle-glyph {
+    font-size: 28px;
+    color: var(--gold);
+    opacity: 0.7;
+    line-height: 1;
+  }
+  .ds-oracle-title {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 3px;
+  }
+  .ds-oracle-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-muted);
+    opacity: 0.7;
+  }
+
+  /* Collapsible context */
+  .ds-context-details {
+    margin-bottom: 24px;
+  }
+  .ds-context-summary {
+    font-family: 'Cinzel', serif;
+    font-size: 8.5px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0.5;
+    cursor: pointer;
+    padding: 8px 0;
+    list-style: none;
+    transition: opacity 0.2s;
+    user-select: none;
+  }
+  .ds-context-summary:hover { opacity: 0.85; }
+  .ds-context-details[open] .ds-context-summary { opacity: 0.8; }
+  .ds-context-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(201,169,110,0.08);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-top: 10px;
+  }
+  @media (max-width: 560px) { .ds-context-grid { grid-template-columns: 1fr; } }
+  .ds-context-sub {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    opacity: 0.65;
+  }
+
+  /* Suggestions */
+  .ds-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .ds-suggest {
+    background: rgba(201,169,110,0.06);
+    border: 1px solid rgba(201,169,110,0.16);
+    color: var(--text-muted);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13.5px;
+    padding: 8px 18px;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+    line-height: 1.4;
+  }
+  .ds-suggest:hover {
+    background: rgba(201,169,110,0.14);
+    color: var(--gold-light);
+    border-color: rgba(201,169,110,0.45);
+    transform: translateY(-1px);
+  }
+
+  /* Input row */
+  .ds-input-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+    margin-bottom: 4px;
+  }
+  .ds-textarea {
+    flex: 1;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 12px;
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    padding: 14px 18px;
+    resize: none;
+    line-height: 1.55;
+    transition: border-color 0.2s, background 0.2s;
+    outline: none;
+  }
+  .ds-textarea:focus {
+    border-color: rgba(201,169,110,0.55);
+    background: rgba(0,0,0,0.45);
+  }
+  .ds-textarea::placeholder { color: var(--text-muted); opacity: 0.45; }
+  .ds-ask-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: linear-gradient(160deg, rgba(201,169,110,0.3), rgba(201,169,110,0.1));
+    border: 1px solid rgba(201,169,110,0.6);
+    color: var(--gold-light);
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    padding: 14px 22px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.22s;
+    white-space: nowrap;
+    flex-shrink: 0;
+    text-transform: uppercase;
+  }
+  .ds-ask-icon { font-size: 18px; }
+  .ds-ask-btn:hover:not(:disabled) {
+    background: linear-gradient(160deg, rgba(201,169,110,0.45), rgba(201,169,110,0.22));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201,169,110,0.22);
+  }
+  .ds-ask-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  /* Response */
+  .ds-response-wrap {
+    margin-top: 28px;
+    padding: 24px 28px;
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(201,169,110,0.15);
+    border-radius: 14px;
+    animation: fadeInUp 0.5s ease both;
+  }
+  .ds-response-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(201,169,110,0.1);
+  }
+  .ds-response-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 3.5px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .ds-response-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--text-muted);
+    opacity: 0.6;
+  }
+  .ds-response-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.9;
+    color: #d4c8e4;
+    white-space: pre-wrap;
+  }
+
+  /* Readings section header */
+  .ds-readings-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 48px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(201,169,110,0.15);
+  }
+
+
+
+  /* ══════════════════════════════════════════
+     THIS MONTH PAGE
+  ══════════════════════════════════════════ */
+
+  /* Month navigator */
+  .month-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    gap: 12px;
+  }
+  .month-nav-btn {
+    width: 40px; height: 40px;
+    background: rgba(201,169,110,0.08);
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 50%;
+    color: var(--gold);
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .month-nav-btn:hover {
+    background: rgba(201,169,110,0.2);
+    transform: scale(1.08);
+  }
+  .month-nav-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .month-label {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: var(--gold-light);
+    text-transform: uppercase;
+  }
+  .month-today-btn {
+    background: transparent;
+    border: 1px solid rgba(201,169,110,0.18);
+    color: var(--text-muted);
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 2.5px;
+    padding: 4px 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .month-today-btn:hover { color: var(--gold); border-color: rgba(201,169,110,0.45); }
+
+  /* Narrative overview */
+  .month-overview {
+    background: rgba(201,169,110,0.04);
+    border: 1px solid rgba(201,169,110,0.14);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 14px 14px 0;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.85;
+    color: #cfc5d8;
+  }
+  .month-overview strong {
+    font-style: normal;
+    color: var(--gold-light);
+    font-weight: 400;
+  }
+
+  /* Mini calendar */
+  .month-cal-wrap {
+    margin-bottom: 36px;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(201,169,110,0.1);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .month-cal-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: rgba(201,169,110,0.06);
+    border-bottom: 1px solid rgba(201,169,110,0.1);
+  }
+  .month-cal-header span {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    opacity: 0.6;
+    text-align: center;
+    padding: 10px 4px;
+    text-transform: uppercase;
+  }
+  .month-cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background: rgba(201,169,110,0.06);
+    padding: 1px;
+  }
+  .cal-day {
+    background: rgba(13,10,20,0.8);
+    min-height: 52px;
+    padding: 6px 8px;
+    position: relative;
+    transition: background 0.15s;
+    cursor: default;
+  }
+  .cal-day.has-event { cursor: pointer; }
+  .cal-day.has-event:hover { background: rgba(201,169,110,0.07); }
+  .cal-day.today { background: rgba(201,169,110,0.08); }
+  .cal-day.today .cal-day-num { color: var(--gold); }
+  .cal-day.other-month { opacity: 0.25; }
+  .cal-day-num {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .cal-event-dots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    margin-top: 2px;
+  }
+  .cal-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .cal-dot.positive  { background: var(--accent-teal); }
+  .cal-dot.challenging { background: var(--accent-rose); }
+  .cal-dot.transformative { background: var(--accent-purple); }
+  .cal-dot.healing { background: #7eb8d4; }
+
+  /* Events list */
+  .month-events-header {
+    margin-bottom: 14px;
+  }
+  .month-events-title {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0.6;
+  }
+  .month-events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+  .month-event-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-left: 3px solid var(--ev-color, rgba(201,169,110,0.4));
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    transition: background 0.18s;
+    animation: fadeInUp 0.35s ease both;
+  }
+  .month-event-card:hover { background: rgba(255,255,255,0.04); }
+  .month-event-card.positive     { --ev-color: var(--accent-teal); }
+  .month-event-card.challenging  { --ev-color: var(--accent-rose); }
+  .month-event-card.transformative { --ev-color: var(--accent-purple); }
+  .month-event-card.healing      { --ev-color: #7eb8d4; }
+  .month-ev-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .month-ev-date {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    opacity: 0.8;
+    text-transform: uppercase;
+  }
+  .month-ev-badge {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 8px;
+    opacity: 0.85;
+  }
+  .month-ev-badge.positive     { background: rgba(126,205,196,0.12); color: var(--accent-teal); }
+  .month-ev-badge.challenging  { background: rgba(224,112,112,0.12); color: var(--accent-rose); }
+  .month-ev-badge.transformative { background: rgba(176,127,212,0.12); color: var(--accent-purple); }
+  .month-ev-badge.healing      { background: rgba(126,184,212,0.12); color: #7eb8d4; }
+  .month-ev-title {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .month-ev-duration {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--text-muted);
+    opacity: 0.6;
+    margin-bottom: 10px;
+  }
+  .month-ev-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    line-height: 1.75;
+    color: #c8bedd;
+  }
+  .month-ev-tip {
+    margin-top: 10px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-style: italic;
+    opacity: 0.75;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .month-no-events {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--text-muted);
+    opacity: 0.6;
+    font-size: 15px;
+    padding: 12px 0 40px;
+  }
+
+  /* ── TAB NAVIGATION ── */
+  .tab-nav {
+    display: flex;
+    gap: 0;
+    margin: 0 0 40px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(201,169,110,0.15);
+    border-radius: 14px;
+    padding: 5px;
+    position: relative;
+  }
+  .tab-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    color: var(--text-muted);
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .tab-btn:hover { color: var(--gold-light); }
+  .tab-btn.active {
+    background: linear-gradient(135deg, rgba(201,169,110,0.2), rgba(201,169,110,0.08));
+    border: 1px solid rgba(201,169,110,0.3);
+    color: var(--gold-light);
+    box-shadow: 0 2px 12px rgba(201,169,110,0.1);
+  }
+  .tab-icon {
+    font-size: 15px;
+    opacity: 0.9;
+  }
+  .tab-label { letter-spacing: 2.5px; }
+
+  /* ── TAB PAGES ── */
+  .tab-page {
+    display: none;
+    animation: fadeInUp 0.35s ease both;
+  }
+  .tab-page.active { display: block; }
+
+  /* remove old divider — replaced by tab nav spacing */
+  .divider { display: none; }
+
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+
+  /* ── SAVED READINGS ── */
+  .readings-count-badge {
+    font-family: 'Lato', sans-serif;
+    font-size: 10px;
+    background: rgba(201,169,110,0.15);
+    border: 1px solid rgba(201,169,110,0.25);
+    color: var(--gold);
+    padding: 2px 8px;
+    border-radius: 10px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    margin-left: 4px;
+  }
+  .readings-empty {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 15px;
+    padding: 12px 0 40px;
+    opacity: 0.7;
+  }
+  .readings-log {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 60px;
+  }
+  .reading-card {
+    background: var(--surface);
+    border: 1px solid rgba(201,169,110,0.12);
+    border-radius: 14px;
+    padding: 20px 22px;
+    animation: fadeInUp 0.4s ease both;
+    transition: border-color 0.2s;
+  }
+  .reading-card:hover { border-color: rgba(201,169,110,0.28); }
+  .reading-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .reading-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .reading-date {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .reading-sky-snap {
+    font-family: 'Lato', sans-serif;
+    font-size: 10px;
+    color: var(--text-muted);
+    opacity: 0.6;
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+  }
+  .reading-delete {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--text-muted);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .reading-delete:hover {
+    background: rgba(224,112,112,0.15);
+    border-color: rgba(224,112,112,0.4);
+    color: var(--accent-rose);
+  }
+  .reading-question {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--gold-light);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .reading-answer-wrap {
+    border-left: 2px solid rgba(201,169,110,0.25);
+    padding-left: 14px;
+    margin-bottom: 12px;
+  }
+  .reading-answer {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #cfc5d8;
+    white-space: pre-wrap;
+  }
+  .reading-aspects {
+    font-size: 11px;
+    color: var(--text-muted);
+    opacity: 0.55;
+    letter-spacing: 0.3px;
+    font-family: 'Lato', sans-serif;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 640px) {
+    .sky-control-bar { grid-template-columns: 1fr 1fr; }
+    .sky-dt-calc, .sky-dt-now { grid-column: span 1; }
+    .natal-section { grid-template-columns: 1fr; }
+    .oracle-input-row { flex-direction: column; align-items: stretch; }
+    .oracle-btn { text-align: center; }
+  }
+  @media (max-width: 600px) {
+    .event-date { min-width: 48px; font-size: 11px; }
+    .event-title { font-size: 14px; }
+    .event-badge { display: none; }
+  }
+
+  /* ═══════════════════════════════════════
+     MOBILE — comprehensive fixes
+  ═══════════════════════════════════════ */
+  @media (max-width: 480px) {
+
+    /* Container */
+    .container { padding: 0 16px 60px; }
+
+    /* Header */
+    header { padding: 40px 0 28px; }
+    .header-ornament { font-size: 20px; letter-spacing: 8px; margin-bottom: 14px; }
+    .birth-details { font-size: 13px; line-height: 1.6; }
+    .natal-tags { gap: 6px; margin-top: 12px; }
+    .ntag { font-size: 10px; padding: 4px 10px; letter-spacing: 1px; }
+
+    /* Tab nav — icon only on very small screens */
+    .tab-nav { padding: 4px; margin-bottom: 24px; border-radius: 12px; }
+    .tab-btn { padding: 10px 6px; gap: 4px; flex-direction: column; font-size: 8px; letter-spacing: 1.5px; }
+    .tab-icon { font-size: 16px; }
+    .tab-label { font-size: 8px; letter-spacing: 1px; }
+
+    /* DS picker */
+    .ds-picker-row {
+      flex-direction: column;
+      padding: 16px;
+      gap: 10px;
+    }
+    .ds-field { min-width: unset; width: 100%; }
+    .ds-actions { width: 100%; }
+    .ds-calc-btn { flex: 1; text-align: center; }
+    .ds-now-btn { flex: 1; text-align: center; }
+
+    /* DS two-col grid */
+    .ds-main-grid { grid-template-columns: 1fr !important; }
+
+    /* Oracle context grid */
+    .ds-context-grid { grid-template-columns: 1fr; }
+
+    /* DS suggestions — full width pills */
+    .ds-suggestions { gap: 6px; }
+    .ds-suggest { font-size: 12px; padding: 7px 12px; }
+
+    /* DS oracle input */
+    .ds-input-row { flex-direction: column; }
+    .ds-ask-btn { width: 100%; justify-content: center; }
+
+    /* Month nav */
+    .month-label { font-size: 16px; letter-spacing: 2px; }
+    .month-cal-header span { font-size: 8px; padding: 8px 2px; }
+    .cal-day { min-height: 42px; padding: 4px 5px; }
+    .cal-day-num { font-size: 10px; }
+
+    /* Year reading */
+    .overview-grid { grid-template-columns: 1fr; }
+    .summary-grid { grid-template-columns: 1fr; }
+
+    /* Natal chart */
+    .natal-section { grid-template-columns: 1fr; }
+
+    /* Section title */
+    .section-title { font-size: 9px; letter-spacing: 3px; }
+
+    /* Reading cards */
+    .reading-answer { font-size: 14px; }
+  }
+
+  /* ── API KEY MODAL ── */
+  .akm-backdrop {
+    position: fixed; inset: 0; z-index: 999;
+    background: rgba(13,10,20,0.88);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .akm-card {
+    background: var(--surface);
+    border: 1px solid rgba(201,169,110,0.3);
+    border-radius: 20px;
+    padding: 36px 28px;
+    max-width: 400px; width: 100%;
+    text-align: center;
+    animation: fadeInUp 0.3s ease both;
+  }
+  .akm-glyph { font-size: 28px; color: var(--gold); margin-bottom: 12px; }
+  .akm-title {
+    font-family: 'Cinzel', serif;
+    font-size: 18px; letter-spacing: 3px;
+    color: var(--gold-light); margin-bottom: 16px;
+  }
+  .akm-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; line-height: 1.7;
+    color: var(--text-muted); margin-bottom: 10px;
+  }
+  .akm-hint {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; color: var(--text-muted);
+    opacity: 0.7; margin-bottom: 20px;
+  }
+  .akm-link { color: var(--gold); text-decoration: none; }
+  .akm-link:hover { text-decoration: underline; }
+  .akm-input {
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(201,169,110,0.25);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    padding: 12px 16px;
+    outline: none;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+  }
+  .akm-input:focus { border-color: rgba(201,169,110,0.6); }
+  .akm-actions { display: flex; gap: 10px; margin-bottom: 16px; }
+  .akm-save {
+    flex: 1;
+    background: linear-gradient(135deg, rgba(201,169,110,0.3), rgba(201,169,110,0.1));
+    border: 1px solid rgba(201,169,110,0.5);
+    color: var(--gold-light);
+    font-family: 'Cinzel', serif;
+    font-size: 10px; letter-spacing: 2px;
+    padding: 12px; border-radius: 10px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .akm-save:hover { background: rgba(201,169,110,0.4); }
+  .akm-cancel {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-muted);
+    font-family: 'Cinzel', serif;
+    font-size: 9px; letter-spacing: 2px;
+    padding: 12px 16px; border-radius: 10px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .akm-cancel:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+  .akm-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px; color: var(--text-muted); opacity: 0.5;
+  }
+  .oracle-key-reset {
+    display: block;
+    background: transparent; border: none;
+    font-family: 'Cinzel', serif;
+    font-size: 8px; letter-spacing: 2px;
+    color: var(--text-muted); opacity: 0.4;
+    cursor: pointer; padding: 4px 0;
+    margin: 8px auto 0;
+    text-transform: uppercase;
+    transition: opacity 0.2s;
+  }
+  .oracle-key-reset:hover { opacity: 0.8; }
+</style>
+</head>
+<body>
+
+<div id="dashboard">
+  <div class="container">
+    <header>
+      <div class="header-ornament">✦ ✦ ✦</div>
+      <h1>Erin</h1>
+      <p class="birth-details">Aug 18 1993 · 9:38 PM CDT · St Louis Park, Minnesota</p>
+      <div class="natal-tags">
+        <span class="ntag">☉ Leo 26°</span>
+        <span class="ntag">☽ Virgo 14°</span>
+        <span class="ntag">↑ Aries ASC</span>
+        <span class="ntag">♃ Libra 12°</span>
+        <span class="ntag">♄ Aquarius 27° R</span>
+        <span class="ntag">♇ Scorpio 22°</span>
+      </div>
+    </header>
+
+    <!-- TAB NAV -->
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="daily" onclick="switchTab('daily')">
+        <span class="tab-icon">☉</span>
+        <span class="tab-label">Daily Sky</span>
+      </button>
+      <button class="tab-btn" data-tab="month" onclick="switchTab('month')">
+        <span class="tab-icon">◐</span>
+        <span class="tab-label">This Month</span>
+      </button>
+      <button class="tab-btn" data-tab="year" onclick="switchTab('year')">
+        <span class="tab-icon">✦</span>
+        <span class="tab-label">Year Reading</span>
+      </button>
+      <button class="tab-btn" data-tab="chart" onclick="switchTab('chart')">
+        <span class="tab-icon">☽</span>
+        <span class="tab-label">Natal Chart</span>
+      </button>
+    </nav>
+
+    <!-- PAGE: NATAL CHART -->
+    <div id="page-chart" class="tab-page">
+      <div class="section-title">Natal Chart</div>
+      <div class="natal-section">
+        <div class="natal-wheel-wrap">
+          <svg id="chart-wheel" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+        <div class="natal-tables">
+          <div class="natal-table-block">
+            <div class="natal-table-title">Planets</div>
+            <table class="natal-table">
+              <thead><tr><th>Planet</th><th>Sign</th><th>Degree</th></tr></thead>
+              <tbody>
+                <tr><td>☉ Sun</td><td>Leo</td><td>26°08'</td></tr>
+                <tr><td>☽ Moon</td><td>Virgo</td><td>14°20'</td></tr>
+                <tr><td>☿ Mercury</td><td>Leo</td><td>15°41'</td></tr>
+                <tr><td>♀ Venus</td><td>Cancer</td><td>19°55'</td></tr>
+                <tr><td>♂ Mars</td><td>Libra</td><td>4°28'</td></tr>
+                <tr><td>♃ Jupiter</td><td>Libra</td><td>12°45'</td></tr>
+                <tr><td>♄ Saturn</td><td>Aquarius</td><td>27°01' R</td></tr>
+                <tr><td>♅ Uranus</td><td>Capricorn</td><td>18°50' R</td></tr>
+                <tr><td>♆ Neptune</td><td>Capricorn</td><td>18°50' R</td></tr>
+                <tr><td>♇ Pluto</td><td>Scorpio</td><td>22°49'</td></tr>
+                <tr><td>⚸ Lilith</td><td>Aries</td><td>4°11'</td></tr>
+                <tr><td>☊ N. Node</td><td>Sagittarius</td><td>8°48'</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="natal-table-block">
+            <div class="natal-table-title">Houses</div>
+            <table class="natal-table">
+              <thead><tr><th>House</th><th>Sign</th></tr></thead>
+              <tbody>
+                <tr><td>I (ASC)</td><td>Aries</td></tr>
+                <tr><td>II</td><td>Taurus</td></tr>
+                <tr><td>III</td><td>Gemini</td></tr>
+                <tr><td>IV (IC)</td><td>Cancer</td></tr>
+                <tr><td>V</td><td>Leo</td></tr>
+                <tr><td>VI</td><td>Virgo</td></tr>
+                <tr><td>VII (DSC)</td><td>Libra</td></tr>
+                <tr><td>VIII</td><td>Scorpio</td></tr>
+                <tr><td>IX</td><td>Sagittarius</td></tr>
+                <tr><td>X (MC)</td><td>Capricorn</td></tr>
+                <tr><td>XI</td><td>Aquarius</td></tr>
+                <tr><td>XII</td><td>Pisces</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE: THIS MONTH -->
+    <div id="page-month" class="tab-page">
+
+      <!-- Month nav -->
+      <div class="month-nav">
+        <button class="month-nav-btn" onclick="shiftMonth(-1)">‹</button>
+        <div class="month-nav-center">
+          <div id="month-label" class="month-label"></div>
+          <button class="month-today-btn" onclick="goToCurrentMonth()">Today</button>
+        </div>
+        <button class="month-nav-btn" onclick="shiftMonth(1)">›</button>
+      </div>
+
+      <!-- Overview narrative -->
+      <div id="month-overview" class="month-overview"></div>
+
+      <!-- Mini calendar -->
+      <div class="month-cal-wrap">
+        <div class="month-cal-header">
+          <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span>
+          <span>Thu</span><span>Fri</span><span>Sat</span>
+        </div>
+        <div id="month-cal-grid" class="month-cal-grid"></div>
+      </div>
+
+      <!-- Events this month -->
+      <div class="month-events-header">
+        <span id="month-events-title" class="month-events-title"></span>
+      </div>
+      <div id="month-events-list" class="month-events-list"></div>
+      <div id="month-no-events" class="month-no-events" style="display:none">
+        No major transiting events fall in this month.
+      </div>
+
+      <!-- Oracle readings for this month -->
+      <div id="month-readings-section" style="display:none">
+        <div class="month-events-header" style="margin-top:40px">
+          <span id="month-readings-title" class="month-events-title"></span>
+        </div>
+        <div id="month-readings-list" class="readings-log"></div>
+      </div>
+
+    </div>
+
+    <!-- PAGE: YEAR READING -->
+    <div id="page-year" class="tab-page">
+      <div class="section-title">The Year at a Glance</div>
+      <div class="overview-grid" id="overview-grid"></div>
+
+      <div class="section-title">Background Planetary Themes</div>
+      <div class="summary-grid" id="planet-grid"></div>
+
+      <div class="section-title">Transiting Events Timeline</div>
+      <div class="filter-bar">
+        <span class="filter-label">Filter:</span>
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="positive">✦ Uplifting</button>
+        <button class="filter-btn" data-filter="challenging">⚡ Challenging</button>
+        <button class="filter-btn" data-filter="transformative">🔮 Transformative</button>
+        <button class="filter-btn" data-filter="healing">💙 Healing</button>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </div>
+
+    <!-- PAGE: DAILY SKY -->
+    <div id="page-daily" class="tab-page active">
+
+      <!-- Date/Time Picker -->
+      <div class="ds-picker-wrap">
+        <div class="ds-picker-row">
+          <div class="ds-field">
+            <label class="ds-field-label" for="sky-date">📅 Date</label>
+            <input type="date" id="sky-date" class="ds-input" />
+          </div>
+          <div class="ds-field">
+            <label class="ds-field-label" for="sky-time">🕐 Time</label>
+            <input type="time" id="sky-time" class="ds-input" />
+          </div>
+          <div class="ds-actions">
+            <button class="ds-calc-btn" onclick="refreshSky()">✦ Calculate</button>
+            <button class="ds-now-btn" onclick="resetToNow()">Live Now</button>
+          </div>
+        </div>
+        <div id="sky-active-label" class="ds-active-label"></div>
+      </div>
+
+      <!-- Loading -->
+      <div id="sky-loading" class="ds-loading" style="display:none">
+        <span class="sky-pulse">✦</span> Calculating planetary positions…
+      </div>
+
+      <!-- Two-column layout: planets left, aspects right -->
+      <div class="ds-main-grid" id="ds-main-grid" style="display:none">
+
+        <!-- Left: Planet positions -->
+        <details class="ds-collapsible">
+          <summary class="ds-col-header">
+            <span class="ds-col-title">Planetary Positions</span>
+            <span class="ds-chevron">›</span>
+          </summary>
+          <div id="sky-grid" class="ds-planet-list"></div>
+        </details>
+
+        <!-- Right: Active aspects -->
+        <details class="ds-collapsible" id="sky-aspects">
+          <summary class="ds-col-header">
+            <span class="ds-col-title">Active Aspects</span>
+            <div class="ds-legend">
+              <span class="ds-legend-item"><span class="ds-dot easy"></span>Easy</span>
+              <span class="ds-legend-item"><span class="ds-dot hard"></span>Hard</span>
+              <span class="ds-legend-item"><span class="ds-dot neutral"></span>Neutral</span>
+            </div>
+            <span class="ds-chevron">›</span>
+          </summary>
+          <div id="sky-aspects-list" class="ds-aspects-list"></div>
+        </details>
+
+      </div>
+
+      <!-- Oracle -->
+      <div class="ds-oracle-wrap">
+        <div class="ds-oracle-header">
+          <div class="ds-oracle-title-block">
+            <span class="ds-oracle-glyph">✦</span>
+            <div>
+              <div class="ds-oracle-title">Ask the Oracle</div>
+              <div class="ds-oracle-sub">The sky above, read against Erin's natal chart</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Collapsible context -->
+        <details class="ds-context-details">
+          <summary class="ds-context-summary">View oracle context ↓</summary>
+          <div class="ds-context-grid" id="oracle-context-grid">
+            <div class="ds-context-col">
+              <div class="ds-context-sub">Transiting Planets</div>
+              <div id="oracle-transit-list" class="oracle-transit-list"></div>
+            </div>
+            <div class="ds-context-col">
+              <div class="ds-context-sub">Active Aspects</div>
+              <div id="oracle-aspect-list" class="oracle-aspect-list"></div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Suggestions -->
+        <div class="ds-suggestions">
+          <button class="ds-suggest" onclick="useSuggestion(this)">What energy should I watch out for today?</button>
+          <button class="ds-suggest" onclick="useSuggestion(this)">Is now a good time to make a big decision?</button>
+          <button class="ds-suggest" onclick="useSuggestion(this)">What does today say about my career?</button>
+          <button class="ds-suggest" onclick="useSuggestion(this)">How are my relationships looking right now?</button>
+          <button class="ds-suggest" onclick="useSuggestion(this)">What should I focus on this week?</button>
+        </div>
+
+        <!-- Input -->
+        <div class="ds-input-row">
+          <textarea id="oracle-input" class="ds-textarea" placeholder="Ask the Oracle anything about this moment…" rows="2"></textarea>
+          <button class="ds-ask-btn" id="oracle-btn" onclick="askOracle()">
+            <span class="ds-ask-icon">✦</span>
+            <span>Ask</span>
+          </button>
+        </div>
+
+        <!-- Error -->
+        <div id="oracle-error" class="oracle-error" style="display:none"></div>
+        <button class="oracle-key-reset" onclick="showApiKeyModal()" title="Update API key">⚙ Update API Key</button>
+
+        <!-- Loading -->
+        <div id="oracle-loading" class="oracle-loading" style="display:none">
+          <span class="oracle-loading-dots"><span>✦</span><span>✦</span><span>✦</span></span>
+          <span class="oracle-loading-text">Consulting the stars…</span>
+        </div>
+
+        <!-- Response -->
+        <div id="oracle-response-wrap" class="ds-response-wrap" style="display:none">
+          <div class="ds-response-header">
+            <span class="ds-response-label">✦ The Oracle Speaks</span>
+            <span id="oracle-date-label" class="ds-response-date"></span>
+          </div>
+          <div id="oracle-response" class="ds-response-text"></div>
+        </div>
+      </div>
+
+      <!-- Saved Readings -->
+      <div class="ds-readings-header">
+        <span class="ds-readings-title">Saved Readings</span>
+        <span id="readings-count" class="readings-count-badge"></span>
+      </div>
+      <p id="readings-empty" class="readings-empty">No readings saved yet. Ask the Oracle something to get started.</p>
+      <div id="readings-log" class="readings-log"></div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── TAB NAVIGATION ──
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-page').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');
+  document.getElementById(`page-${tab}`).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (tab === 'month') renderMonth();
+}
+
+// ── THIS MONTH ──
+const MONTH_NAMES = ['January','February','March','April','May','June',
+                     'July','August','September','October','November','December'];
+
+// Per-month narratives (keyed as YYYY-M, 1-indexed month)
+const MONTH_NARRATIVES = {
+  '2025-10': `<strong>October 2025</strong> opens with Jupiter's trine to your natal Pluto (exact Oct 3) — a window of genuine career confidence and recognition. Jupiter also briefly enters your 5th house of creativity and play on Oct 17 before returning to your 4th. An energizing, forward-moving month.`,
+  '2025-11': `<strong>November 2025</strong> is a cozy, creative interlude with Jupiter moving through your 5th house. Lean into play, creative projects, and living fully in the moment. The bigger transits pause — enjoy the lightness before the more transformative months ahead.`,
+  '2025-12': `<strong>December 2025</strong> brings a second powerful career boost: Jupiter trine Pluto again on Dec 20. Jupiter also returns to your 4th house of home on Dec 7, deepening the focus on family and roots. End the year with both professional momentum and domestic warmth.`,
+  '2026-1': `<strong>January 2026</strong> is a month of contrasts. Fortune smiles on love and money (Jupiter conjunct Venus, exact Jan 11) — enjoy social warmth and romantic possibility. But mid-month brings a fog of restlessness and confusion (Jupiter opposite Uranus and Neptune, Jan 19). Celebrate the joy; delay the big decisions.`,
+  '2026-2': `<strong>February 2026</strong> is a month to go carefully. Uranus squares Saturn (exact Feb 3) — your foundations feel less stable than usual. Pluto trine Mars begins building though, offering a quiet thread of purposeful energy beneath the disruption. Stay flexible and hold your ground gently.`,
+  '2026-3': `<strong>March 2026</strong> brings two challenging Saturn transits: Saturn squares your Midheaven on the 14th (a crossroads of career and life direction), then opposes your Mars on the 23rd (others seem to block every path). This is the month to reassess, not to push. Patience will be rewarded.`,
+  '2026-4': `<strong>April 2026</strong> is the most pivotal month of the year. Chiron trines your Sun again on the 8th, deepening your healing journey. Then on April 12, Saturn conjuncts your Ascendant — a major life threshold. Saturn trine North Node on the 28th opens destiny's door. A month of profound beginnings.`,
+  '2026-5': `<strong>May 2026</strong> is complex and abundant. Neptune squares your Midheaven through June — don't make firm career decisions yet. But Jupiter conjuncts Venus again (May 7), Chiron trines your natal Chiron (May 7), and Jupiter trine Pluto peaks on May 25. Healing, love, and power all arrive together.`,
+  '2026-6': `<strong>June 2026</strong> begins with Jupiter entering your 5th house of creativity on Jun 1 — a joyful shift. The Neptune midheaven fog is still present, but the energy lifts considerably. Let creativity, play, and self-expression take the lead. The purposeful Pluto trine Mars also continues in the background.`,
+  '2026-7': `<strong>July 2026</strong> crackles with energy. Uranus trine Mars (exact Jul 17) lights you up with initiative and drive. Saturn trine Mercury (exact Jul 26) sharpens your thinking. Jupiter trine Ascendant (exact Jul 31) brings health, joy, and social recognition. One of the most energising months of the year.`,
+  '2026-8': `<strong>August 2026</strong> is warm and expansive. Jupiter trine North Node (exact Aug 9) brings meaningful new connections into your orbit. The Neptune opposition Mars is still present — rest and restoration matter. But the overall energy is of connection, vision, and the right people appearing at the right time.`,
+  '2026-9': `<strong>September 2026</strong> brings both abundance and a reality check. Jupiter conjunct Mercury (exact Sep 10) is a fantastic window for communication, good news, and professional recognition. Mid-month brings Neptune square Midheaven returning and Saturn opposing your natal Jupiter — balance ambition with honest reassessment.`,
+};
+
+const DEFAULT_NARRATIVE = `This month falls outside the detailed reading window (Oct 2025 – Oct 2026), but the major background transits — Jupiter expanding your home and creativity, Chiron healing your identity, and Uranus refreshing your relationship with money — continue to shape your world.`;
+
+// Parse an event's primary date into { year, month (1-indexed), day }
+function parseEventDate(ev) {
+  // Handle dates like "Aug 21 & Oct 1, 2026" — use first date
+  const str = ev.date.split('&')[0].trim();
+  const d = new Date(str);
+  if (!isNaN(d)) return { year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate() };
+  return null;
+}
+
+// Also check if an event's duration window overlaps the given month
+function eventOverlapsMonth(ev, year, month) {
+  const primary = parseEventDate(ev);
+  if (primary && primary.year === year && primary.month === month) return true;
+
+  // Parse duration string: "Feb 19 – Mar 8, 2026 · Exact Feb 28"
+  const durMatch = ev.duration.match(/^(.+?)\s*·/);
+  if (!durMatch) return false;
+  const range = durMatch[1].trim();
+  const parts = range.split('–').map(s => s.trim());
+  if (parts.length < 2) return false;
+
+  // The end part usually has the year; start part may not
+  const endRaw = parts[1];
+  const endDate = new Date(endRaw);
+  if (isNaN(endDate)) return false;
+
+  // Reconstruct start — it may lack a year
+  let startRaw = parts[0];
+  if (!/\d{4}/.test(startRaw)) startRaw += ', ' + endDate.getFullYear();
+  const startDate = new Date(startRaw);
+  if (isNaN(startDate)) return false;
+
+  const targetStart = new Date(year, month - 1, 1);
+  const targetEnd   = new Date(year, month, 0); // last day of month
+  return startDate <= targetEnd && endDate >= targetStart;
+}
+
+let _currentMonthYear = new Date().getFullYear();
+let _currentMonthMonth = new Date().getMonth() + 1;
+
+function shiftMonth(delta) {
+  _currentMonthMonth += delta;
+  if (_currentMonthMonth > 12) { _currentMonthMonth = 1; _currentMonthYear++; }
+  if (_currentMonthMonth < 1)  { _currentMonthMonth = 12; _currentMonthYear--; }
+  renderMonth();
+}
+
+function goToCurrentMonth() {
+  const n = new Date();
+  _currentMonthYear  = n.getFullYear();
+  _currentMonthMonth = n.getMonth() + 1;
+  renderMonth();
+}
+
+function renderMonth() {
+  const year = _currentMonthYear;
+  const month = _currentMonthMonth;
+  const today = new Date();
+
+  // Label
+  document.getElementById('month-label').textContent =
+    `${MONTH_NAMES[month - 1]} ${year}`;
+
+  // Narrative
+  const key = `${year}-${month}`;
+  document.getElementById('month-overview').innerHTML =
+    MONTH_NARRATIVES[key] || DEFAULT_NARRATIVE;
+
+  // Filter events that touch this month
+  const monthEvents = data.events.filter(ev => eventOverlapsMonth(ev, year, month));
+
+  // ── Mini calendar ──
+  const firstDay = new Date(year, month - 1, 1).getDay(); // 0=Sun
+  const daysInMonth = new Date(year, month, 0).getDate();
+
+  // Build a map: day -> [event types]
+  const dayMap = {};
+  monthEvents.forEach(ev => {
+    const pd = parseEventDate(ev);
+    if (pd && pd.year === year && pd.month === month) {
+      if (!dayMap[pd.day]) dayMap[pd.day] = [];
+      dayMap[pd.day].push(ev.type);
+    }
+  });
+
+  const calGrid = document.getElementById('month-cal-grid');
+  let cells = '';
+
+  // Leading blanks from previous month
+  const prevMonthDays = new Date(year, month - 1, 0).getDate();
+  for (let i = 0; i < firstDay; i++) {
+    const d = prevMonthDays - firstDay + i + 1;
+    cells += `<div class="cal-day other-month"><div class="cal-day-num">${d}</div></div>`;
+  }
+
+  // This month's days
+  for (let d = 1; d <= daysInMonth; d++) {
+    const isToday = today.getFullYear() === year && today.getMonth() + 1 === month && today.getDate() === d;
+    const dots = (dayMap[d] || []).map(t => `<div class="cal-dot ${t}"></div>`).join('');
+    const hasEv = dayMap[d] ? 'has-event' : '';
+    cells += `<div class="cal-day ${hasEv} ${isToday ? 'today' : ''}">
+      <div class="cal-day-num">${d}</div>
+      ${dots ? `<div class="cal-event-dots">${dots}</div>` : ''}
+    </div>`;
+  }
+
+  // Trailing blanks
+  const totalCells = firstDay + daysInMonth;
+  const trailing = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+  for (let i = 1; i <= trailing; i++) {
+    cells += `<div class="cal-day other-month"><div class="cal-day-num">${i}</div></div>`;
+  }
+
+  calGrid.innerHTML = cells;
+
+  // ── Events list ──
+  const listEl = document.getElementById('month-events-list');
+  const noEvEl = document.getElementById('month-no-events');
+  const titleEl = document.getElementById('month-events-title');
+
+  titleEl.textContent = monthEvents.length
+    ? `${monthEvents.length} Transit${monthEvents.length > 1 ? 's' : ''} Active This Month`
+    : '';
+
+  if (!monthEvents.length) {
+    listEl.innerHTML = '';
+    noEvEl.style.display = 'block';
+    return;
+  }
+  noEvEl.style.display = 'none';
+
+  const typeLabel = { positive: 'Uplifting', challenging: 'Challenging', transformative: 'Transformative', healing: 'Healing' };
+
+  listEl.innerHTML = monthEvents.map((ev, i) => `
+    <div class="month-event-card ${ev.type}" style="animation-delay:${i * 0.06}s">
+      <div class="month-ev-meta">
+        <span class="month-ev-date">${ev.date}</span>
+        <span class="month-ev-badge ${ev.type}">${typeLabel[ev.type]}</span>
+      </div>
+      <div class="month-ev-title">${ev.title}</div>
+      <div class="month-ev-duration">${ev.duration}</div>
+      <div class="month-ev-body">${ev.description}</div>
+      <div class="month-ev-tip">${ev.tip}</div>
+    </div>
+  `).join('');
+
+  // Readings for this month
+  loadReadings().then(renderMonthReadings);
+}
+
+
+const data = {
+  overviewCards: [
+    {
+      icon: "🏠",
+      title: "Home & Family at the Center",
+      body: "Jupiter spends most of this year in your 4th house of home and family — expanding your sense of comfort, security, and domestic life. Whether through a move, renovation, or a new family chapter, your roots are flourishing."
+    },
+    {
+      icon: "🎭",
+      title: "Saturn Steps Into the Light",
+      body: "After years working behind the scenes (Saturn in your 12th), Saturn enters your 1st house in April 2026. The private preparation is over — it's time to step forward, claim your identity, and take on the responsibilities that come with being seen."
+    },
+    {
+      icon: "💸",
+      title: "Unpredictable Income (Embrace It)",
+      body: "Uranus sits in your 2nd house of money all year — making finances exciting but erratic. Rather than chasing stability, explore new ways of earning. A risk-taking attitude toward income may open surprising doors."
+    },
+    {
+      icon: "🌊",
+      title: "Spiritual Depth & Rest",
+      body: "Neptune and Pluto are working through your 12th and 11th houses — a call toward retreat, reflection, and authentic friendships. This is a year of spiritual deepening as much as outer achievement."
+    },
+    {
+      icon: "🌿",
+      title: "Healing the Self",
+      body: "Chiron in your 1st house throughout the year invites profound personal healing. Old wounds around identity, your body, and how you show up in the world are surfacing — and for the first time, genuinely ready to be released."
+    }
+  ],
+  planets: [
+    {
+      symbol: "♃",
+      name: "Jupiter",
+      position: "4th House (most of year) · 5th House Oct–Dec 2025 & Jun–Oct 2026",
+      detail: "Bringing abundance and warmth to home, family, and creative expression. Expect comfort, expansion, and possible new family members or living arrangements."
+    },
+    {
+      symbol: "♄",
+      name: "Saturn",
+      position: "12th House through Apr 12, 2026 · then 1st House",
+      detail: "Behind-the-scenes work and spiritual preparation through spring, then a major identity shift: stepping into the world, claiming recognition, and shouldering new responsibilities."
+    },
+    {
+      symbol: "♅",
+      name: "Uranus",
+      position: "2nd House all year",
+      detail: "Sudden shifts in income and spending. Financial unpredictability is the theme — go with the flow rather than gripping tightly to stability. New earning models may emerge."
+    },
+    {
+      symbol: "♆",
+      name: "Neptune",
+      position: "12th House all year",
+      detail: "Deep spiritual pull toward retreat, rest, and letting go. Life's demands can feel overwhelming — regular solitude and meditation will be genuinely restorative."
+    },
+    {
+      symbol: "♇",
+      name: "Pluto",
+      position: "11th House all year",
+      detail: "Transforming your friendships and group affiliations. Powerful new connections and equally powerful partings. Authentic community matters more than ever."
+    },
+    {
+      symbol: "⚷",
+      name: "Chiron",
+      position: "1st House all year",
+      detail: "The great healer moves through your house of self. Identity wounds, physical health, and how you present yourself in the world are all up for healing and integration."
+    }
+  ],
+  events: [
+    {
+      date: "Sep 18, 2025",
+      type: "healing",
+      title: "Chiron Trine Sun — Becoming Whole",
+      duration: "Aug 7 – Oct 11, 2025 · Exact Sep 18",
+      description: "A beautiful healing window opens around your core identity and sense of self. Hidden skills surface, chance encounters spark new fields of learning, and the wounds you've carried around 'who you are' begin to truly close. Self-forgiveness and authentic expression are the gifts here.",
+      tip: "💙 Be kind to yourself — pray, meditate, rest. These self-care actions energise you in body and spirit."
+    },
+    {
+      date: "Oct 3, 2025",
+      type: "positive",
+      title: "Jupiter Trine Pluto — Career Confidence",
+      duration: "Sep 25 – Oct 13, 2025 · Exact Oct 3",
+      description: "You strike exactly the right balance of confidence and persistence. Others notice your power and composure. Career advancement, promotions, and opportunities for recognition arrive — your judgment is sound, so take the shot.",
+      tip: "✦ Make the most of every opportunity for advancement. Your timing and instincts are excellent right now."
+    },
+    {
+      date: "Jan 2 & Mar 8, 2026",
+      type: "challenging",
+      title: "Uranus Square Chiron — Breaking Old Habits",
+      duration: "Dec 4, 2025 – Apr 4, 2026 · Exact Jan 2 & Mar 8",
+      description: "A long, important transit urging you to shake out the cobwebs — break free from patterns that have been masking your true nature. Predictable comfort has served its purpose; now you're being called to explore new territory. Ghosts from the past may need confronting before you can move forward.",
+      tip: "⚡ Face what's been haunting you. Healing the past is how you recharge for a brighter future."
+    },
+    {
+      date: "Dec 20, 2025",
+      type: "positive",
+      title: "Jupiter Trine Pluto — Power & Recognition (Again)",
+      duration: "Dec 10 – Dec 28, 2025 · Exact Dec 20",
+      description: "A second pass of Jupiter's empowering trine to your natal Pluto. Confidence, purpose, and recognition continue to build. This is a genuinely excellent window for bold career moves and professional visibility.",
+      tip: "✦ Step into any spotlight being offered. Your authority and vision are compelling to others right now."
+    },
+    {
+      date: "Jan 11, 2026",
+      type: "positive",
+      title: "Jupiter Conjunct Venus — Love & Fortune Aligned",
+      duration: "Jan 4 – Jan 19, 2026 · Exact Jan 11",
+      description: "Fortune smiles on love, relationships, and money. You're in love with life itself — and your joy is contagious. Existing relationships deepen beautifully; if single, someone significant may enter. Social invitations, financial opportunities, and gifts from influential people are all on the table.",
+      tip: "✦ Say yes to social events and romantic overtures. Don't let this golden window pass quietly."
+    },
+    {
+      date: "Jan 19, 2026",
+      type: "challenging",
+      title: "Jupiter Opposite Uranus & Neptune — The Beautiful Maze",
+      duration: "Jan 12 – Jan 27, 2026 · Exact Jan 19",
+      description: "A restless, disorienting time — you feel a strong pull toward change but the path isn't clear. Excitement and confusion arrive together. Others may seem unreliable or deceptive; more likely, your own idealism is at play. Avoid long-term decisions made in this fog.",
+      tip: "⚡ Bide your time and remain grounded. Clarity will return — don't make sweeping commitments just yet."
+    },
+    {
+      date: "Feb 3, 2026",
+      type: "challenging",
+      title: "Uranus Square Saturn — When Safe Feels Unsafe",
+      duration: "Dec 29, 2025 – Mar 12, 2026 · Exact Feb 3",
+      description: "Your usual foundations feel unstable no matter how hard you try to firm them up. Disruptions arrive from unexpected directions. Rather than fighting for false stability, stay flexible and positive — the new shape of your life is being forged here.",
+      tip: "⚡ Don't fret if you feel shaky. It will pass — and you'll appreciate where it leads."
+    },
+    {
+      date: "Feb 26, 2026",
+      type: "positive",
+      title: "Pluto Trine Mars — Purpose in Motion",
+      duration: "Jan 24 – Apr 22, 2026 · Exact Feb 26",
+      description: "A long, powerful window where your energy and ambition flow together beautifully. Goal-setting, enlisting support, and pushing toward your life's work all come naturally. Physical vitality is high — sports and fitness are especially satisfying now.",
+      tip: "✦ Focus on your goals and don't get distracted. You can make real inroads into your life's ambitions."
+    },
+    {
+      date: "Mar 14, 2026",
+      type: "challenging",
+      title: "Saturn Square Midheaven — Life Direction Reassessment",
+      duration: "Mar 5 – Mar 22, 2026 · Exact Mar 14",
+      description: "A pivotal moment for examining the balance between your career and personal life. If you've been all work, family may be calling. If you've been focused on home, career goals may need setting. Either way: honest reflection on what a purposeful life looks like for you is required.",
+      tip: "⚡ Take time to seriously consider your direction — the seeds you plant now can reap rewards for years."
+    },
+    {
+      date: "Mar 23, 2026",
+      type: "challenging",
+      title: "Saturn Opposite Mars — Patience Under Pressure",
+      duration: "Mar 15 – Mar 31, 2026 · Exact Mar 23",
+      description: "Obstacles and other people seem to block every path you try to take. Frustration and exhaustion are real. This is not the time to push harder — it's the time to step back, reassess your ambitions, and let others have their space. Patience pays off.",
+      tip: "⚡ Maintain your sense of self without bulldozing. Quiet persistence and cooperation will unlock more than force."
+    },
+    {
+      date: "Apr 8, 2026",
+      type: "healing",
+      title: "Chiron Trine Sun — Healing Returns",
+      duration: "Mar 22 – Apr 24, 2026 · Exact Apr 8",
+      description: "A second powerful pass of Chiron's healing trine to your Sun. What began in September is deepening now. You have the chance to become more wholly yourself — authentic, forgiven, purposeful. Hidden gifts continue to surface.",
+      tip: "💙 This is a gift. Accept it by being truly kind to yourself — rest, self-care, and inner work are deeply rewarded."
+    },
+    {
+      date: "Apr 12, 2026",
+      type: "transformative",
+      title: "Saturn Conjunct Ascendant — A New Cycle Begins",
+      duration: "Apr 4 – Apr 20, 2026 · Exact Apr 12",
+      description: "One of the most significant transits of this year: Saturn crosses your Ascendant, marking the birth of a major new life chapter. The behind-the-scenes work of recent years is over — you step forward into public view and take on the responsibilities that come with being truly seen. Health, identity, and relationships are all being restructured.",
+      tip: "🔮 Step forward and claim what you've been building. Take on the new responsibilities with grace, not resentment."
+    },
+    {
+      date: "Apr 28, 2026",
+      type: "positive",
+      title: "Saturn Trine North Node — Destiny Knocks",
+      duration: "Apr 19 – May 7, 2026 · Exact Apr 28",
+      description: "A rare, beautiful window where destiny opens its doors. Rewards for past actions accumulate. A significant person or opportunity appears to help you walk your true path. What's unfolding now is aligned with your soul's deepest direction.",
+      tip: "✦ Pay close attention to who and what appears in this window — it may change the shape of your future."
+    },
+    {
+      date: "Apr 30 & May 7, 2026",
+      type: "challenging",
+      title: "Jupiter Opposite Neptune & Uranus — Confusion & Liberation",
+      duration: "Apr 22 – May 14, 2026",
+      description: "Two back-to-back oppositions bring a mix of restlessness and fog. Exciting possibilities float on the horizon but paths seem unclear. On May 7, Jupiter also conjuncts your natal Venus again — love and finances get a second beautiful boost, even amid the wider uncertainty.",
+      tip: "⚡ Keep your feet on the ground while remaining open to new directions — clarity is coming, just not yet."
+    },
+    {
+      date: "May 7, 2026",
+      type: "positive",
+      title: "Jupiter Conjunct Venus — Love Returns (Second Pass)",
+      duration: "Apr 30 – May 14, 2026 · Exact May 7",
+      description: "A second visit from Jupiter's conjunction to your natal Venus. Another window of joy, romantic warmth, financial improvement, and social abundance. If opportunities arrived in January and you let them pass, they circle back now. Financial investments may pay off.",
+      tip: "✦ Embrace love, social connection, and financial opportunity. This is the second chance version of January's magic."
+    },
+    {
+      date: "May 7, 2026",
+      type: "healing",
+      title: "Chiron Trine Chiron — Purpose Opens Its Doors",
+      duration: "Apr 21 – May 26, 2026 · Exact May 7",
+      description: "A rare and meaningful transit: Chiron trine your natal Chiron. Doors open enabling you to express your true purpose with unusual clarity. Opportunities in teaching, healing, or guiding others may arrive. Some fears may need to be crossed to fully embrace the gift.",
+      tip: "💙 The opportunity may involve teaching or healing. Say yes, even if it stretches you."
+    },
+    {
+      date: "May 2, 2026",
+      type: "challenging",
+      title: "Neptune Square Midheaven — Life Direction in the Fog",
+      duration: "Apr 4 – Jun 18, 2026 · Exact May 2",
+      description: "A searching, questioning period around your career and life direction. You may feel disillusioned, directionless, or hungry for more meaning in your work. This isn't a crisis — it's an invitation to find a path that's truly yours, not just the one you've been following by habit.",
+      tip: "⚡ Don't make major career decisions yet. Bide your time, stay tuned to your intuition, and let the fog clear."
+    },
+    {
+      date: "May 25, 2026",
+      type: "positive",
+      title: "Jupiter Trine Pluto — Third Pass of Career Power",
+      duration: "May 19 – May 30, 2026 · Exact May 25",
+      description: "The third and final pass of Jupiter trine Pluto brings another wave of career confidence, recognition, and purpose. Whatever professional goal you've been building toward all year — this is the culmination moment.",
+      tip: "✦ This is the harvest of the year's career energy. Make your boldest, most confident move."
+    },
+    {
+      date: "Jul 8, 2026",
+      type: "challenging",
+      title: "Neptune Opposite Mars — Rest, Don't Push",
+      duration: "May 7 – Sep 8, 2026 · Exact Jul 8",
+      description: "A long, draining transit that calls for radical rest. Goals that seemed important may lose their pull; energy feels elusive. Someone may try to take advantage of your lowered defenses. Creative and spiritual pursuits are soothing — but now is not the time for major commitments or business decisions.",
+      tip: "⚡ Slow down, offload duties where possible, and remember: pessimism during this transit isn't the truth of your life."
+    },
+    {
+      date: "Jul 19, 2026",
+      type: "positive",
+      title: "Pluto Trine Mars — Purpose Returns (Long Window)",
+      duration: "May 20 – Sep 3, 2026 · Exact Jul 19",
+      description: "Even while Neptune is draining energy, Pluto continues to support your drive and purpose in a deeper way. This is fuel for your most meaningful ambitions — the ones that outlast the fog. Physical activities and fitness provide excellent outlets.",
+      tip: "✦ Channel energy into your long-game goals. The most demanding tasks feel possible now."
+    },
+    {
+      date: "Jul 17, 2026",
+      type: "positive",
+      title: "Uranus Trine Mars — Ignition",
+      duration: "Jun 26 – Aug 18, 2026 · Exact Jul 17",
+      description: "Like a match striking, this transit brings an electric burst of initiative and energy. Assertion and flexibility work together beautifully. Anything you initiate now carries a spark of aliveness — the question is simply: what do you want to start?",
+      tip: "✦ Begin the project, venture, or pursuit that will make you feel most alive. Your initiative is on fire."
+    },
+    {
+      date: "Jul 26, 2026",
+      type: "positive",
+      title: "Saturn Trine Mercury — Sharp Mind, Clear Plans",
+      duration: "Jul 17 – Aug 5, 2026 · Exact Jul 26",
+      description: "Mental clarity and realistic optimism merge. New ideas, plans, and decisions are well-founded and executable. An excellent window for learning, study, and committing to projects with genuine long-term potential.",
+      tip: "✦ Make your plans and commit to them — your judgment is sharp and your thinking is sound."
+    },
+    {
+      date: "Jul 31, 2026",
+      type: "positive",
+      title: "Jupiter Trine Ascendant — Joy & Recognition",
+      duration: "Jul 27 – Aug 5, 2026 · Exact Jul 31",
+      description: "Health, happiness, and social grace are all flowing. Joyful occasions, supportive people, and a general sense of being seen and appreciated. Travel, study, or self-improvement pursuits are especially rewarding. You may step into a teaching role.",
+      tip: "✦ Enjoy this window fully — say yes to events, people, and opportunities. You're at your most magnetic."
+    },
+    {
+      date: "Aug 9, 2026",
+      type: "positive",
+      title: "Jupiter Trine North Node — Your People Appear",
+      duration: "Aug 4 – Aug 13, 2026 · Exact Aug 9",
+      description: "The people meant to be part of your journey begin to appear. New or renewed connections could expand your horizons in meaningful ways — perhaps even toward engagement, marriage, or a deeply significant partnership. Be your authentic self and let the right ones find you.",
+      tip: "✦ Don't push or perform — the connections forming now are natural and fated."
+    },
+    {
+      date: "Sep 10, 2026",
+      type: "positive",
+      title: "Jupiter Conjunct Mercury — Good News Arrives",
+      duration: "Sep 5 – Sep 15, 2026 · Exact Sep 10",
+      description: "Communications are favored in every direction — positive outcomes on projects, beneficial announcements, mental sharpness, and the ability to think and decide with confidence. Promotions, contracts, and property decisions are all likely to go well. Your optimism and big-picture thinking are noticed.",
+      tip: "✦ Say yes to the professional and communication opportunity in front of you — your words carry real weight now."
+    },
+    {
+      date: "Sep 14 & Sep 15, 2026",
+      type: "challenging",
+      title: "Neptune Square Midheaven & Saturn Opposite Jupiter — Reality Check",
+      duration: "Late Aug – Late Sep 2026",
+      description: "Two challenging transits coincide: Neptune continues to cloud your career direction, while Saturn opposes your natal Jupiter — making forward progress feel blocked and expectations harder to meet. Don't let frustration harden into bitterness; use this window to reassess what truly matters.",
+      tip: "⚡ Shoulder your responsibilities and let go of overextended ambitions. Clarity and reward follow this reassessment."
+    }
+  ]
+};
+
+// ── NATAL CHART WHEEL ──
+(function() {
+  const svg = document.getElementById('chart-wheel');
+  const cx = 250, cy = 250;
+  const R_outer = 230, R_sign = 200, R_house = 160, R_planet = 125, R_inner = 80;
+
+  const signs = ['Ari','Tau','Gem','Can','Leo','Vir','Lib','Sco','Sag','Cap','Aqu','Pis'];
+  const signColors = ['#e07070','#7ecdc4','#e8d5a3','#6aaddb','#e8b44a','#a8c8a0',
+                      '#b07fd4','#e07070','#e8a060','#6aaddb','#7ecdc4','#b07fd4'];
+  const signSymbols = ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
+
+  // ASC = Virgo = sign index 5 (0=Ari). ASC degree = 0° Virgo for simplicity (chart starts here)
+  // We place ASC at 180° (left, 9 o'clock) as per traditional chart display
+  const ascSignIndex = 0; // Aries
+  const ascDeg = 6.93; // 6°56' Aries
+
+  // Convert zodiac absolute degree to SVG angle
+  // ASC = Aries 6.93° = 6.93° absolute. We place ASC at 180° on the SVG (left).
+  const ascAbsolute = ascSignIndex * 30 + ascDeg; // 6.93
+
+  function zodiacToAngle(absZodDeg) {
+    // rotate so ASC (150°) sits at 180° on circle, counterclockwise zodiac = clockwise SVG
+    let angle = 180 - (absZodDeg - ascAbsolute);
+    return ((angle % 360) + 360) % 360;
+  }
+
+  function polarToXY(angleDeg, r) {
+    const rad = (angleDeg - 90) * Math.PI / 180;
+    return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+  }
+
+  function addEl(tag, attrs, text) {
+    const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+    if (text) el.textContent = text;
+    svg.appendChild(el);
+    return el;
+  }
+
+  function arc(cx, cy, r, startAngle, endAngle) {
+    const s = polarToXY(startAngle, r);
+    const e = polarToXY(endAngle, r);
+    const large = ((endAngle - startAngle + 360) % 360) > 180 ? 1 : 0;
+    return `M ${s.x} ${s.y} A ${r} ${r} 0 ${large} 1 ${e.x} ${e.y}`;
+  }
+
+  // Background
+  addEl('circle', { cx, cy, r: R_outer, fill: '#0d0a14' });
+
+  // Sign ring
+  for (let i = 0; i < 12; i++) {
+    const absStart = i * 30;
+    const absEnd = (i + 1) * 30;
+    const aStart = zodiacToAngle(absStart);
+    const aEnd = zodiacToAngle(absEnd);
+    // Wedge
+    const sOuter = polarToXY(aStart, R_outer);
+    const eOuter = polarToXY(aEnd, R_outer);
+    const sInner = polarToXY(aStart, R_sign);
+    const eInner = polarToXY(aEnd, R_sign);
+    const large = 0; // each segment is 30° < 180
+    const pathD = `M ${sInner.x} ${sInner.y} L ${sOuter.x} ${sOuter.y} A ${R_outer} ${R_outer} 0 0 1 ${eOuter.x} ${eOuter.y} L ${eInner.x} ${eInner.y} A ${R_sign} ${R_sign} 0 0 0 ${sInner.x} ${sInner.y} Z`;
+    addEl('path', { d: pathD, fill: i % 2 === 0 ? 'rgba(201,169,110,0.05)' : 'rgba(201,169,110,0.02)', stroke: 'rgba(201,169,110,0.25)', 'stroke-width': '0.5' });
+
+    // Sign symbol
+    const midAngle = zodiacToAngle(i * 30 + 15);
+    const symPos = polarToXY(midAngle, (R_outer + R_sign) / 2);
+    addEl('text', { x: symPos.x, y: symPos.y, 'text-anchor': 'middle', 'dominant-baseline': 'central', fill: signColors[i], 'font-size': '13', 'font-family': 'serif', opacity: '0.9' }, signSymbols[i]);
+  }
+
+  // House ring
+  const houseSigns = [0,1,2,3,4,5,6,7,8,9,10,11]; // Aries, Taurus, Gemini... (I=Aries)
+  const houseDegrees = [0,0,0,0,0,0,0,0,0,0,0,0]; // simplify: each house starts at 0° of its sign
+  for (let i = 0; i < 12; i++) {
+    const absStart = houseSigns[i] * 30;
+    const absEnd = houseSigns[(i + 1) % 12] * 30;
+    const aStart = zodiacToAngle(absStart);
+    const aLine = polarToXY(aStart, R_house);
+    const aLineOuter = polarToXY(aStart, R_sign);
+    addEl('line', { x1: aLine.x, y1: aLine.y, x2: aLineOuter.x, y2: aLineOuter.y, stroke: 'rgba(201,169,110,0.35)', 'stroke-width': '0.8' });
+
+    // House number
+    const midAbs = houseSigns[i] * 30 + 15;
+    const hMid = zodiacToAngle(midAbs);
+    const hPos = polarToXY(hMid, (R_sign + R_house) / 2);
+    const hLabels = ['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'];
+    addEl('text', { x: hPos.x, y: hPos.y, 'text-anchor': 'middle', 'dominant-baseline': 'central', fill: 'rgba(201,169,110,0.5)', 'font-size': '9', 'font-family': 'Cinzel, serif', 'letter-spacing': '1' }, hLabels[i]);
+  }
+
+  // Inner circles
+  addEl('circle', { cx, cy, r: R_house, fill: 'none', stroke: 'rgba(201,169,110,0.2)', 'stroke-width': '0.5' });
+  addEl('circle', { cx, cy, r: R_inner, fill: 'rgba(201,169,110,0.03)', stroke: 'rgba(201,169,110,0.15)', 'stroke-width': '0.5' });
+
+  // Spoke lines for angular houses
+  const angulars = [0, 3, 6, 9]; // ASC, IC, DSC, MC
+  for (const h of angulars) {
+    const abs = houseSigns[h] * 30;
+    const a = zodiacToAngle(abs);
+    const p1 = polarToXY(a, R_inner);
+    const p2 = polarToXY(a, R_sign);
+    addEl('line', { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, stroke: 'rgba(201,169,110,0.6)', 'stroke-width': '1.2' });
+  }
+
+  // Planets - Erin's natal chart
+  // absZod = sign_index * 30 + degrees
+  // Aries=0, Taurus=30, Gemini=60, Cancer=90, Leo=120, Virgo=150, Libra=180, Scorpio=210, Sag=240, Cap=270, Aqu=300, Pis=330
+  const planets = [
+    { sym: '☉', absZod: 120 + 26.13, color: '#e8d5a3', label: '☉' },  // Sun Leo 26°
+    { sym: '☽', absZod: 150 + 14.33, color: '#c8d8f0', label: '☽' }, // Moon Virgo 14°
+    { sym: '☿', absZod: 120 + 15.68, color: '#a0c8a0', label: '☿' }, // Merc Leo 15°
+    { sym: '♀', absZod: 90 + 19.92, color: '#e8a0b8', label: '♀' },  // Ven Cancer 19°
+    { sym: '♂', absZod: 180 + 4.47, color: '#e07070', label: '♂' },  // Mars Libra 4°
+    { sym: '♃', absZod: 180 + 12.75, color: '#e8b44a', label: '♃' }, // Jup Libra 12°
+    { sym: '♄', absZod: 300 + 27.02, color: '#7ecdc4', label: '♄' }, // Sat Aqu 27° R
+    { sym: '♅', absZod: 270 + 18.83, color: '#90c8e0', label: '♅' }, // Ura Cap 18° R
+    { sym: '♆', absZod: 270 + 18.83, color: '#b07fd4', label: '♆' }, // Nep Cap 18° R
+    { sym: '♇', absZod: 210 + 22.82, color: '#c09060', label: '♇' }, // Plu Sco 22°
+    { sym: '☊', absZod: 240 + 8.8, color: '#d4b07f', label: '☊' },  // Node Sag 8°
+  ];
+
+  // Spread planets to avoid overlap
+  const placed = [];
+  function getSpreadAngle(angle) {
+    let spread = zodiacToAngle(angle);
+    for (const p of placed) {
+      if (Math.abs(spread - p) < 12 || Math.abs(spread - p - 360) < 12 || Math.abs(spread - p + 360) < 12) {
+        spread += 13;
+      }
+    }
+    placed.push(spread);
+    return spread;
+  }
+
+  for (const p of planets) {
+    const baseAngle = zodiacToAngle(p.absZod);
+    const spreadAngle = getSpreadAngle(p.absZod);
+    const pos = polarToXY(spreadAngle, R_planet);
+
+    // Tick line from outer house ring to planet
+    const tick1 = polarToXY(baseAngle, R_house - 4);
+    const tick2 = polarToXY(baseAngle, R_house - 14);
+    addEl('line', { x1: tick1.x, y1: tick1.y, x2: tick2.x, y2: tick2.y, stroke: p.color, 'stroke-width': '0.8', opacity: '0.6' });
+
+    // Connector line if spread
+    if (Math.abs(spreadAngle - baseAngle) > 2) {
+      const pOuter = polarToXY(baseAngle, R_house - 16);
+      addEl('line', { x1: pos.x, y1: pos.y, x2: pOuter.x, y2: pOuter.y, stroke: p.color, 'stroke-width': '0.5', opacity: '0.3' });
+    }
+
+    // Glyph
+    addEl('text', { x: pos.x, y: pos.y, 'text-anchor': 'middle', 'dominant-baseline': 'central', fill: p.color, 'font-size': '13', 'font-family': 'serif' }, p.sym);
+  }
+
+  // Center label
+  addEl('text', { x: cx, y: cy - 8, 'text-anchor': 'middle', fill: 'rgba(201,169,110,0.5)', 'font-size': '9', 'font-family': 'Cinzel, serif', 'letter-spacing': '2' }, 'ERIN');
+  addEl('text', { x: cx, y: cy + 8, 'text-anchor': 'middle', fill: 'rgba(201,169,110,0.35)', 'font-size': '8', 'font-family': 'serif' }, 'Aug 18 1993');
+
+  // ASC / DSC / MC / IC labels
+  const angles = [
+    { label: 'ASC', abs: 6.93, offset: -12 },
+    { label: 'DSC', abs: 186.93, offset: 4 },
+    { label: 'MC', abs: 273, offset: -6 },
+    { label: 'IC', abs: 93, offset: -6 },
+  ];
+  for (const a of angles) {
+    const ang = zodiacToAngle(a.abs);
+    const p = polarToXY(ang, R_sign - 8);
+    addEl('text', { x: p.x + a.offset, y: p.y, 'text-anchor': 'middle', fill: 'rgba(201,169,110,0.7)', 'font-size': '8', 'font-family': 'Cinzel, serif', 'letter-spacing': '1' }, a.label);
+  }
+})();
+
+// Render overview cards
+const overviewGrid = document.getElementById('overview-grid');
+overviewGrid.innerHTML = data.overviewCards.map((card, i) => `
+  <div class="overview-card" style="animation-delay:${i * 0.1}s">
+    <div class="oc-icon">${card.icon}</div>
+    <h3>${card.title}</h3>
+    <p>${card.body}</p>
+  </div>
+`).join('');
+
+// Render planet cards
+const planetGrid = document.getElementById('planet-grid');
+planetGrid.innerHTML = data.planets.map((p, i) => `
+  <div class="planet-card" style="animation-delay:${i * 0.08}s">
+    <div class="symbol">${p.symbol}</div>
+    <div class="planet-name">${p.name}</div>
+    <div class="planet-pos"><strong>${p.position}</strong><br>${p.detail}</div>
+  </div>
+`).join('');
+
+// Render timeline
+const badgeMap = { positive: 'badge-positive', challenging: 'badge-challenging', transformative: 'badge-transformative', healing: 'badge-healing' };
+const labelMap = { positive: 'Uplifting', challenging: 'Challenging', transformative: 'Transformative', healing: 'Healing' };
+
+const timeline = document.getElementById('timeline');
+timeline.innerHTML = data.events.map((ev, i) => {
+  const type = ev.type || 'positive';
+  return `
+    <div class="event ${type}" style="animation-delay:${i * 0.05}s">
+      <div class="event-header" onclick="toggle(this)">
+        <span class="event-date">${ev.date}</span>
+        <span class="event-badge ${badgeMap[type]}">${labelMap[type]}</span>
+        <span class="event-title">${ev.title}</span>
+        <span class="event-chevron">▼</span>
+      </div>
+      <div class="event-body">
+        <div class="event-duration">${ev.duration}</div>
+        <p>${ev.description}</p>
+        <div class="key-theme">${ev.tip}</div>
+      </div>
+    </div>
+  `;
+}).join('');
+
+// Filter buttons
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    const filter = this.dataset.filter;
+    document.querySelectorAll('.event').forEach(ev => {
+      ev.style.display = (filter === 'all' || ev.classList.contains(filter)) ? '' : 'none';
+    });
+  });
+});
+
+function toggle(header) {
+  header.parentElement.classList.toggle('open');
+}
+
+// ══════════════════════════════════════════════
+// TODAY'S SKY — Simplified but real planetary positions
+// Uses mean longitude formulas (low-precision but good enough for signs + degrees)
+// ══════════════════════════════════════════════
+
+function calcTodayPlanets(dateOverride) {
+  // J2000.0 epoch = Jan 1.5 2000 = JD 2451545.0
+  const now = dateOverride || new Date();
+  const JD = (now.getTime() / 86400000) + 2440587.5;
+  const T = (JD - 2451545.0) / 36525; // Julian centuries from J2000
+
+  // Mean longitudes (degrees) — simplified VSOP87 / IAU mean elements
+  function norm(x) { return ((x % 360) + 360) % 360; }
+
+  const raw = {
+    Sun:     norm(280.46646 + 36000.76983 * T + 0.0003032 * T * T),
+    Moon:    norm(218.3165 + 481267.8813 * T),
+    Mercury: norm(252.25084 + 149472.67411 * T),
+    Venus:   norm(181.97973 + 58517.81539 * T),
+    Mars:    norm(355.45332 + 19140.29934 * T),
+    Jupiter: norm(34.89503 + 3034.74612 * T),
+    Saturn:  norm(50.07780 + 1222.11353 * T),
+    Uranus:  norm(314.05501 + 428.46819 * T),
+    Neptune: norm(304.34866 + 218.45945 * T),
+    Pluto:   norm(238.92903 + 145.20780 * T),
+    Chiron:  norm(209.67 + 3646.0 * T / 365.25 * (360/50.7)) // approx 50.7yr orbit
+  };
+
+  // Add Sun's equation of centre approximation
+  const M_sun = norm(357.52911 + 35999.05029 * T);
+  const Mrad = M_sun * Math.PI / 180;
+  const eoc = (1.9146 - 0.004817 * T) * Math.sin(Mrad)
+            + (0.019993 - 0.000101 * T) * Math.sin(2 * Mrad)
+            + 0.00029 * Math.sin(3 * Mrad);
+  raw.Sun = norm(raw.Sun + eoc - 0.00569 - 0.00478 * Math.sin((125.04 - 1934.136 * T) * Math.PI / 180));
+
+  const signs = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
+  const symbols = { Sun:'☉', Moon:'☽', Mercury:'☿', Venus:'♀', Mars:'♂', Jupiter:'♃', Saturn:'♄', Uranus:'♅', Neptune:'♆', Pluto:'♇', Chiron:'⚷' };
+  const colors = { Sun:'#e8d5a3', Moon:'#c8d8f0', Mercury:'#a0c8a0', Venus:'#e8a0b8', Mars:'#e07070', Jupiter:'#e8b44a', Saturn:'#7ecdc4', Uranus:'#90c8e0', Neptune:'#b07fd4', Pluto:'#c09060', Chiron:'#d4b07f' };
+
+  const result = [];
+  for (const [name, lon] of Object.entries(raw)) {
+    const signIdx = Math.floor(lon / 30);
+    const deg = lon % 30;
+    result.push({
+      name, symbol: symbols[name], color: colors[name],
+      sign: signs[signIdx], lon,
+      deg: Math.floor(deg), min: Math.floor((deg % 1) * 60),
+      signIdx
+    });
+  }
+  return result;
+}
+
+// Erin's natal planets (absolute zodiac degrees)
+// Signs: Aries=0, Taurus=30, Gemini=60, Cancer=90, Leo=120, Virgo=150, Libra=180, Scorpio=210, Sag=240, Cap=270, Aqu=300, Pis=330
+const connorNatal = [
+  { name: 'Sun',     lon: 120 + 26.13, label: 'Natal Sun',     sign: 'Leo',         house: 5  },
+  { name: 'Moon',    lon: 150 + 14.33, label: 'Natal Moon',    sign: 'Virgo',       house: 6  },
+  { name: 'Mercury', lon: 120 + 15.68, label: 'Natal Mercury', sign: 'Leo',         house: 5  },
+  { name: 'Venus',   lon: 90 + 19.92,  label: 'Natal Venus',   sign: 'Cancer',      house: 4  },
+  { name: 'Mars',    lon: 180 + 4.47,  label: 'Natal Mars',    sign: 'Libra',       house: 7  },
+  { name: 'Jupiter', lon: 180 + 12.75, label: 'Natal Jupiter', sign: 'Libra',       house: 7  },
+  { name: 'Saturn',  lon: 300 + 27.02, label: 'Natal Saturn',  sign: 'Aquarius',    house: 11 },
+  { name: 'Uranus',  lon: 270 + 18.83, label: 'Natal Uranus',  sign: 'Capricorn',   house: 10 },
+  { name: 'Neptune', lon: 270 + 18.83, label: 'Natal Neptune', sign: 'Capricorn',   house: 10 },
+  { name: 'Pluto',   lon: 210 + 22.82, label: 'Natal Pluto',   sign: 'Scorpio',     house: 8  },
+  { name: 'ASC',     lon: 0 + 6.93,    label: 'Natal ASC',     sign: 'Aries',       house: 1  },
+  { name: 'MC',      lon: 270 + 3,     label: 'Natal MC',      sign: 'Capricorn',   house: 10 },
+  { name: 'N.Node',  lon: 240 + 8.8,   label: 'Natal N.Node',  sign: 'Sagittarius', house: 9  },
+];
+
+// Erin's house cusps — each entry is the absolute zodiac longitude of the cusp
+// I Aries 6.93°≈7, II Taurus 0°=30, III Gemini 0°=60, IV Cancer 0°=90,
+// V Leo 0°=120, VI Virgo 0°=150, VII Libra 0°=180, VIII Scorpio 0°=210,
+// IX Sag 0°=240, X Cap 3°≈273, XI Aqu 0°=300, XII Pis 0°=330
+const HOUSE_CUSPS = [6.93, 30, 60, 90, 120, 150, 180, 210, 240, 273, 300, 330];
+const HOUSE_THEMES = [
+  'Self & Identity', 'Money & Values', 'Communication', 'Home & Roots',
+  'Creativity & Romance', 'Health & Routine', 'Relationships', 'Shared Resources & Transformation',
+  'Philosophy & Travel', 'Career & Status', 'Friends & Goals', 'Inner Life & Solitude'
+];
+
+function getTransitHouse(lon) {
+  // Normalize longitude 0–360
+  const l = ((lon % 360) + 360) % 360;
+  // Find which house: iterate cusps, house i spans from HOUSE_CUSPS[i] to HOUSE_CUSPS[(i+1)%12]
+  for (let i = 0; i < 12; i++) {
+    const start = HOUSE_CUSPS[i];
+    const end = HOUSE_CUSPS[(i + 1) % 12];
+    if (start <= end) {
+      if (l >= start && l < end) return i + 1;
+    } else {
+      // Wraps around 0° (e.g. house VIII: 0°–30°, cusp at 330°–30°)
+      if (l >= start || l < end) return i + 1;
+    }
+  }
+  return 1;
+}
+
+const ASPECT_ORBS = [
+  { name: 'Conjunction', angle: 0,   orb: 8, type: 'neutral' },
+  { name: 'Sextile',     angle: 60,  orb: 5, type: 'easy' },
+  { name: 'Square',      angle: 90,  orb: 7, type: 'hard' },
+  { name: 'Trine',       angle: 120, orb: 7, type: 'easy' },
+  { name: 'Opposition',  angle: 180, orb: 8, type: 'hard' },
+  { name: 'Quincunx',    angle: 150, orb: 3, type: 'neutral' },
+];
+
+function findAspects(todayPlanets) {
+  const aspects = [];
+  for (const tp of todayPlanets) {
+    const houseNum = getTransitHouse(tp.lon);
+    const houseTheme = HOUSE_THEMES[houseNum - 1];
+    for (const np of connorNatal) {
+      let diff = Math.abs(tp.lon - np.lon) % 360;
+      if (diff > 180) diff = 360 - diff;
+      for (const asp of ASPECT_ORBS) {
+        const delta = Math.abs(diff - asp.angle);
+        if (delta <= asp.orb) {
+          aspects.push({
+            transitPlanet: tp.name,
+            transitSymbol: tp.symbol,
+            transitSign: tp.sign,
+            natalPoint: np.name,
+            natalLabel: np.label,
+            natalSign: np.sign,
+            natalHouse: np.house,
+            aspect: asp.name,
+            type: asp.type,
+            orb: delta.toFixed(1),
+            house: houseNum,
+            houseTheme
+          });
+        }
+      }
+    }
+  }
+  // Sort by orb tightness
+  aspects.sort((a, b) => parseFloat(a.orb) - parseFloat(b.orb));
+  return aspects.slice(0, 12); // top 12
+}
+
+function renderTodaysSky(dateOverride) {
+  const planets = calcTodayPlanets(dateOverride);
+  window._todayPlanets = planets; // store for oracle
+  window._skyDate = dateOverride || new Date(); // store for context label
+
+  const grid = document.getElementById('sky-grid'); // sky-grid is now ds-planet-list container inside ds-main-grid
+  grid.innerHTML = planets.map(p => `
+    <div class="ds-planet-row" style="--planet-color:${p.color}">
+      <span class="ds-planet-sym" style="color:${p.color}">${p.symbol}</span>
+      <span class="ds-planet-name">${p.name}</span>
+      <span class="ds-planet-sign">${p.sign}</span>
+      <span class="ds-planet-deg">${p.deg}°${String(p.min).padStart(2,'0')}'</span>
+    </div>`
+  ).join('');
+
+  const aspects = findAspects(planets);
+  window._todayAspects = aspects;
+  const aspectsList = document.getElementById('sky-aspects-list');
+  if (aspects.length) {
+    aspectsList.innerHTML = aspects.map(a => `
+      <div class="ds-aspect-row ${a.type}">
+        <span class="ds-aspect-pip"></span>
+        <div class="ds-aspect-text">
+          <div class="ds-aspect-main">
+            <strong>${a.transitSymbol} ${a.transitPlanet}</strong>
+            <span class="ds-aspect-type-badge ${a.type}">${a.aspect}</span>
+            <strong>${a.natalPoint}</strong>
+          </div>
+          <div class="ds-aspect-detail">${a.transitSign} H${a.house} · ${a.natalSign} H${a.natalHouse} · orb ${a.orb}°</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  document.getElementById('sky-loading').style.display = 'none';
+  document.getElementById('ds-main-grid').style.display = 'grid';
+
+  // Update active label
+  const labelEl = document.getElementById('sky-active-label');
+  if (labelEl) {
+    const d = window._skyDate;
+    const isNow = !dateOverride;
+    labelEl.innerHTML = isNow
+      ? `<span class="ds-label-live">● Live</span> ${d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })} · ${d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`
+      : `${d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })} · ${d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
+  }
+
+  // Populate oracle context panel
+  const transitListEl = document.getElementById('oracle-transit-list');
+  if (transitListEl) {
+    transitListEl.innerHTML = planets.map(p => `
+      <div class="oracle-transit-row">
+        <span class="oracle-transit-sym" style="color:${p.color}">${p.symbol}</span>
+        <span class="oracle-transit-name">${p.name}</span>
+        <span class="oracle-transit-pos"><strong>${p.sign}</strong> ${p.deg}°${String(p.min).padStart(2,'0')}'</span>
+      </div>
+    `).join('');
+  }
+
+  const aspectListEl = document.getElementById('oracle-aspect-list');
+  const aspects2 = findAspects(planets);
+  if (aspectListEl && aspects2.length) {
+    aspectListEl.innerHTML = aspects2.map(a => `
+      <div class="oracle-aspect-row">
+        <span class="oracle-asp-dot ${a.type}"></span>
+        <span><strong>${a.transitSymbol} ${a.transitPlanet}</strong> in ${a.transitSign} (H${a.house}) ${a.aspect.toLowerCase()} <strong>${a.natalLabel}</strong> in ${a.natalSign} (H${a.natalHouse})<span class="orb-tag"> · ${a.orb}°</span></span>
+      </div>
+    `).join('');
+  }
+}
+
+// ══════════════════════════════════════════════
+// READINGS PERSISTENCE — uses localStorage
+// ══════════════════════════════════════════════
+
+const STORAGE_KEY = 'erin_oracle_readings';
+const API_KEY_STORAGE = 'erin_anthropic_key';
+
+async function loadReadings() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+async function saveReading(reading) {
+  try {
+    const readings = await loadReadings();
+    readings.unshift(reading);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(readings));
+    return readings;
+  } catch (err) {
+    console.warn('Storage save failed:', err);
+    return null;
+  }
+}
+
+async function deleteReading(id) {
+  try {
+    const readings = await loadReadings();
+    const updated = readings.filter(r => r.id !== id);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    renderReadingsLog(updated);
+    renderMonthReadings(updated);
+  } catch (err) {
+    console.warn('Delete failed:', err);
+  }
+}
+
+function renderReadingsLog(readings) {
+  const wrap = document.getElementById('readings-log');
+  const empty = document.getElementById('readings-empty');
+  const count = document.getElementById('readings-count');
+
+  count.textContent = readings.length ? `${readings.length} saved` : '';
+
+  if (!readings.length) {
+    wrap.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  wrap.innerHTML = readings.map(r => `
+    <div class="reading-card" id="rc-${r.id}">
+      <div class="reading-card-header">
+        <div class="reading-meta">
+          <span class="reading-date">${r.dateStr}</span>
+          <span class="reading-sky-snap">${r.skySnap}</span>
+        </div>
+        <button class="reading-delete" onclick="deleteReading('${r.id}')" title="Delete reading">✕</button>
+      </div>
+      <div class="reading-question">"${r.question}"</div>
+      <div class="reading-answer-wrap">
+        <div class="reading-answer">${r.answer}</div>
+      </div>
+      <div class="reading-aspects">${r.aspectSnap}</div>
+    </div>
+  `).join('');
+}
+
+async function initReadingsLog() {
+  const readings = await loadReadings();
+  renderReadingsLog(readings);
+}
+
+function renderMonthReadings(readings) {
+  const section = document.getElementById('month-readings-section');
+  if (!section) return;
+
+  const year = _currentMonthYear;
+  const month = _currentMonthMonth;
+
+  const monthReadings = readings.filter(r =>
+    r.skyYear === year && r.skyMonth === month
+  );
+
+  const titleEl = document.getElementById('month-readings-title');
+  const listEl  = document.getElementById('month-readings-list');
+
+  if (!monthReadings.length) {
+    section.style.display = 'none';
+    return;
+  }
+
+  section.style.display = 'block';
+  titleEl.textContent = `${monthReadings.length} Oracle Reading${monthReadings.length > 1 ? 's' : ''} This Month`;
+
+  listEl.innerHTML = monthReadings.map(r => `
+    <div class="reading-card" id="mrc-${r.id}">
+      <div class="reading-card-header">
+        <div class="reading-meta">
+          <span class="reading-date">${r.dateStr}</span>
+          <span class="reading-sky-snap">${r.skySnap}</span>
+        </div>
+        <button class="reading-delete" onclick="deleteReading('${r.id}')" title="Delete reading">✕</button>
+      </div>
+      <div class="reading-question">"${r.question}"</div>
+      <div class="reading-answer-wrap">
+        <div class="reading-answer">${r.answer}</div>
+      </div>
+      <div class="reading-aspects">${r.aspectSnap}</div>
+    </div>
+  `).join('');
+}
+
+// ══════════════════════════════════════════════
+// ORACLE
+// ══════════════════════════════════════════════
+
+function useSuggestion(btn) {
+  document.getElementById('oracle-input').value = btn.textContent;
+  document.getElementById('oracle-input').focus();
+}
+
+function buildOracleContext() {
+  const skyDate = window._skyDate || new Date();
+  const dateStr = skyDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  const timeStr = skyDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+  const planetLines = (window._todayPlanets || []).map(p =>
+    `${p.name}: ${p.sign} ${p.deg}°${String(p.min).padStart(2,'0')}'`
+  ).join(', ');
+
+  const aspectLines = (window._todayAspects || []).map(a =>
+    `Transiting ${a.transitPlanet} in ${a.transitSign} (H${a.house} — ${a.houseTheme}) ${a.aspect} natal ${a.natalPoint} in ${a.natalSign} (H${a.natalHouse}) (orb ${a.orb}°)`
+  ).join('\n');
+
+  return `Sky date/time: ${dateStr} at ${timeStr}.
+
+ERIN'S NATAL CHART:
+Born: August 18, 1993 · 9:38 PM CDT · St Louis Park, Minnesota
+Sun: Leo 26°08' | Moon: Virgo 14°20' | ASC: Aries 6°56' | MC: Capricorn 3°
+Mercury: Leo 15°41' | Venus: Cancer 19°55' | Mars: Libra 4°28'
+Jupiter: Libra 12°45' | Saturn: Aquarius 27°01' R | Uranus: Capricorn 18°50' R
+Neptune: Capricorn 18°50' R | Pluto: Scorpio 22°49'
+Lilith: Aries 4°11' | North Node: Sagittarius 8°48'
+Houses: I Aries, II Taurus, III Gemini, IV Cancer, V Leo, VI Virgo,
+        VII Libra, VIII Scorpio, IX Sagittarius, X Capricorn, XI Aquarius, XII Pisces
+
+TODAY'S TRANSITING PLANETS:
+${planetLines}
+
+ACTIVE ASPECTS (transiting planets to Connor's natal chart):
+${aspectLines}
+
+BACKGROUND TRANSITS FOR THIS YEAR (Oct 2025–Oct 2026):
+- Jupiter in 4th house (home/family) most of the year, briefly in 5th house (creativity/play) Oct–Dec 2025 and again from Jun 2026
+- Saturn in 12th house (behind-the-scenes, spiritual retreat) through Apr 2026, then moving into 1st house (identity, new beginnings)
+- Uranus in 2nd house all year: unpredictable income, rethinking relationship with money
+- Neptune in 12th house: dissolving old patterns, need for rest and spiritual reflection
+- Pluto in 11th house: transformation of friendships and group affiliations
+- Chiron in 1st house: deep healing of identity wounds, embodying true self`;
+}
+
+async function askOracle() {
+  const question = document.getElementById('oracle-input').value.trim();
+  if (!question) return;
+
+  // Check for API key
+  const apiKey = localStorage.getItem(API_KEY_STORAGE);
+  if (!apiKey) {
+    showApiKeyModal();
+    return;
+  }
+
+  document.getElementById('oracle-btn').disabled = true;
+  document.getElementById('oracle-response-wrap').style.display = 'none';
+  document.getElementById('oracle-error').style.display = 'none';
+  document.getElementById('oracle-loading').style.display = 'flex';
+
+  const context = buildOracleContext();
+  const skyDate = window._skyDate || new Date();
+  const dateStr = skyDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })
+    + ' · ' + skyDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+  const systemPrompt = `You are a wise, warm, and insightful astrologer named the Oracle. You speak with depth and clarity — not mystical vagueness, but grounded, thoughtful astrological interpretation that actually helps the person understand what's happening in their life.
+
+You have been given:
+1. A person's complete natal chart
+2. Today's exact transiting planetary positions
+3. The active aspects between today's transits and their natal chart
+4. The major background transit themes for the year
+
+Your job is to answer their question by synthesising all of this information. Be specific — name the relevant planets, aspects, and houses. Explain what they mean in plain language, with astrological depth. Be warm and encouraging without being saccharine. Acknowledge difficulty honestly when it's there.
+
+Format your response in clear paragraphs — no bullet points, no numbered lists. Use section headers sparingly and only when the answer genuinely has distinct parts. Keep responses between 150–300 words. End with one clear, actionable sentence.`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: [{
+          role: 'user',
+          content: `${context}\n\nMY QUESTION: ${question}`
+        }]
+      })
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(String(response.status));
+    if (!data.content || !data.content[0]) throw new Error('No response');
+    const text = data.content.map(c => c.text || '').join('').trim();
+
+    // Show inline
+    document.getElementById('oracle-loading').style.display = 'none';
+    document.getElementById('oracle-date-label').textContent = dateStr;
+    document.getElementById('oracle-response').textContent = text;
+    document.getElementById('oracle-response-wrap').style.display = 'block';
+    document.getElementById('oracle-response-wrap').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    document.getElementById('oracle-input').value = '';
+
+    // Build sky snapshot for the saved card
+    const skySnap = (window._todayPlanets || [])
+      .map(p => `${p.symbol} ${p.sign.slice(0,3)} ${p.deg}°`)
+      .join(' · ');
+    const aspectSnap = (window._todayAspects || []).slice(0, 5)
+      .map(a => `${a.transitSymbol} ${a.aspect.slice(0,3).toLowerCase()} ${a.natalPoint}`)
+      .join(' · ');
+
+    // Save to persistent storage
+    const reading = {
+      id: Date.now().toString(),
+      dateStr,
+      question,
+      answer: text,
+      skySnap,
+      aspectSnap,
+      skyYear: skyDate.getFullYear(),
+      skyMonth: skyDate.getMonth() + 1  // 1-indexed
+    };
+    const updated = await saveReading(reading);
+    if (updated) {
+      renderReadingsLog(updated);
+      renderMonthReadings(updated);
+    }
+
+  } catch (err) {
+    document.getElementById('oracle-loading').style.display = 'none';
+    const isAuth = err.message && err.message.includes('401');
+    if (isAuth) {
+      localStorage.removeItem(API_KEY_STORAGE);
+      document.getElementById('oracle-error').textContent = 'API key invalid. Please re-enter your key.';
+    } else {
+      document.getElementById('oracle-error').textContent = 'Something went wrong. Please try again.';
+    }
+    document.getElementById('oracle-error').style.display = 'block';
+  } finally {
+    document.getElementById('oracle-btn').disabled = false;
+  }
+}
+
+// Allow Enter to submit (Shift+Enter for newline)
+document.getElementById('oracle-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); askOracle(); }
+});
+
+// ── Date/time picker setup ──
+function toLocalDateString(d) {
+  // Returns YYYY-MM-DD in local time for the date input value
+  return d.getFullYear() + '-'
+    + String(d.getMonth() + 1).padStart(2, '0') + '-'
+    + String(d.getDate()).padStart(2, '0');
+}
+function toLocalTimeString(d) {
+  return String(d.getHours()).padStart(2, '0') + ':'
+    + String(d.getMinutes()).padStart(2, '0');
+}
+
+function resetToNow() {
+  const now = new Date();
+  document.getElementById('sky-date').value = toLocalDateString(now);
+  document.getElementById('sky-time').value = toLocalTimeString(now);
+  renderTodaysSky(null);
+}
+
+function refreshSky() {
+  const dateVal = document.getElementById('sky-date').value;
+  const timeVal = document.getElementById('sky-time').value || '12:00';
+  if (!dateVal) { resetToNow(); return; }
+  const [y, m, d] = dateVal.split('-').map(Number);
+  const [h, min] = timeVal.split(':').map(Number);
+  const dt = new Date(y, m - 1, d, h, min, 0);
+  renderTodaysSky(dt);
+}
+
+// Init — set picker to now and render
+const _initNow = new Date();
+document.getElementById('sky-date').value = toLocalDateString(_initNow);
+document.getElementById('sky-time').value = toLocalTimeString(_initNow);
+renderTodaysSky(null);
+initReadingsLog();
+</script>
+<!-- API Key Modal -->
+<div id="api-key-modal" class="akm-backdrop" style="display:none">
+  <div class="akm-card">
+    <div class="akm-glyph">✦</div>
+    <div class="akm-title">Oracle Setup</div>
+    <p class="akm-body">To use the Oracle, enter your Anthropic API key. It's stored only in your browser — never sent anywhere except directly to Anthropic.</p>
+    <p class="akm-hint">Get a key at <a href="https://console.anthropic.com" target="_blank" class="akm-link">console.anthropic.com</a> → API Keys</p>
+    <input id="akm-input" class="akm-input" type="password" placeholder="sk-ant-…" autocomplete="off" />
+    <div class="akm-actions">
+      <button class="akm-save" onclick="saveApiKey()">Save & Continue</button>
+      <button class="akm-cancel" onclick="hideApiKeyModal()">Cancel</button>
+    </div>
+    <p class="akm-note">You can reset your key anytime by tapping the ⚙ below the Oracle.</p>
+  </div>
+</div>
+
+<script>
+function showApiKeyModal() {
+  document.getElementById('api-key-modal').style.display = 'flex';
+  setTimeout(() => document.getElementById('akm-input').focus(), 100);
+}
+function hideApiKeyModal() {
+  document.getElementById('api-key-modal').style.display = 'none';
+}
+function saveApiKey() {
+  const key = document.getElementById('akm-input').value.trim();
+  if (!key.startsWith('sk-')) {
+    document.getElementById('akm-input').style.borderColor = 'var(--accent-rose)';
+    return;
+  }
+  localStorage.setItem(API_KEY_STORAGE, key);
+  hideApiKeyModal();
+  document.getElementById('akm-input').value = '';
+  // Retry the oracle question if one was pending
+  const q = document.getElementById('oracle-input').value.trim();
+  if (q) askOracle();
+}
+document.getElementById('akm-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') saveApiKey();
+});
+</script>
+
+</body>
+</html>
